@@ -1,7 +1,8 @@
 import Arrow from '@/assets/svg/arrow.svg';
 import src from 'concurrently';
+import { Link, LinkProps } from 'react-router-dom';
 
-export interface IBaseCardProps {
+export interface IBaseCardProps extends Omit<LinkProps, 'content'> {
   companyLogoSrc: string;
   companyName: string;
   content: React.ReactNode;
@@ -13,9 +14,14 @@ export const BaseCard = ({
   companyName,
   content,
   footer,
+  ...rest
 }: IBaseCardProps) => {
+  console.log('🚀 ~ rest:', rest);
   return (
-    <button className="p-12 rounded-3xl bg-white hover:[box-shadow:0px_10px_10px_-5px_rgba(0,_0,_0,_0.04),_0px_20px_25px_-5px_rgba(0,_0,_0,_0.10)] transition-[box-shadow_0.3s] cursor-pointer text-left">
+    <Link
+      {...rest}
+      className="p-12 rounded-3xl bg-white hover:[box-shadow:0px_10px_10px_-5px_rgba(0,_0,_0,_0.04),_0px_20px_25px_-5px_rgba(0,_0,_0,_0.10)] transition-[box-shadow_0.3s] cursor-pointer text-left"
+    >
       <div className="flex gap-4 items-center">
         <img
           className="h-[2.5rem] aspect-square object-cover object-center"
@@ -37,6 +43,6 @@ export const BaseCard = ({
           />
         </button>
       </div>
-    </button>
+    </Link>
   );
 };

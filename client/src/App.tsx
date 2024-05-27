@@ -11,8 +11,7 @@ function App() {
   return (
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
-        <div className="App font-mono h-screen flex flex-col items-stretch w-full">
-          <Header />
+        <div className="App font-mono">
           <Router />
         </div>
         <ToastContainer />

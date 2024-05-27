@@ -1,17 +1,22 @@
+import { Link } from 'react-router-dom';
+
 const SECTIONS: Array<{
   BG: string;
   title: string;
   text: string;
+  link: string;
 }> = [
   {
     BG: './images/hero-section-bg-1.jpg',
     title: 'Вакансии',
     text: 'Изучай актуальные вакансии в ведущих компаниях',
+    link: '/vacancies',
   },
   {
     BG: './images/hero-section-bg-2.jpg',
     title: 'Компании',
     text: 'Место, где таланты выбирают команды',
+    link: '/companies',
   },
 ];
 
@@ -19,7 +24,8 @@ export const HeroSection = () => {
   return (
     <div className="flex gap-[3rem]">
       {SECTIONS.map((section) => (
-        <div
+        <Link
+          to={section.link}
           key={section.title}
           className="flex p-5 flex-col justify-end items-center flex-[1_0_0] self-stretch aspect-[35/23] rounded-3xl bg-cover cursor-pointer hover:transform hover:scale-105 transition-all hover:[box-shadow:0px_10px_10px_-5px_rgba(0,_0,_0,_0.04),_0px_20px_25px_-5px_rgba(0,_0,_0,_0.10)] "
           style={{
@@ -37,7 +43,7 @@ export const HeroSection = () => {
               {section.text}
             </p>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );

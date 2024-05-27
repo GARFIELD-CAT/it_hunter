@@ -1,5 +1,6 @@
 import { CompanyCard } from '@/components/CompanyCard';
 import { ICompanyShort } from '@/types/company';
+import { Link } from 'react-router-dom';
 
 const MOCK_COMPANIES: Array<ICompanyShort> = new Array(14).fill({
   id: '1',
@@ -16,9 +17,12 @@ export const CompanySection = ({ className }: { className?: string }) => {
         <h2 className="text-[2.45119rem] not-italic font-normal leading-[2.75rem]">
           Компании недели
         </h2>
-        <div className="text-[1rem] not-italic font-normal leading-6">
+        <Link
+          to="/companies"
+          className="text-[1rem] not-italic font-normal leading-6"
+        >
           Смотреть все
-        </div>
+        </Link>
       </div>
       <div className="grid gap-x-16 gap-y-12 grid-cols-2 mt-[3rem]">
         {MOCK_COMPANIES.map((company) => (
