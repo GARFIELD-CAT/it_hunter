@@ -20,6 +20,7 @@ export const HeroSection = () => {
     <div className="flex gap-[3rem]">
       {SECTIONS.map((section) => (
         <div
+          key={section.title}
           className="flex p-5 flex-col justify-end items-center flex-[1_0_0] self-stretch aspect-[35/23] rounded-3xl bg-cover cursor-pointer hover:transform hover:scale-105 transition-all hover:[box-shadow:0px_10px_10px_-5px_rgba(0,_0,_0,_0.04),_0px_20px_25px_-5px_rgba(0,_0,_0,_0.10)] "
           style={{
             backgroundImage: `url(${section.BG})`,

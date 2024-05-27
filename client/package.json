@@ -2,7 +2,7 @@
   "name": "react-redux-saga-ts-vite-boilerplate",
   "version": "0.0.4",
   "scripts": {
-    "start": "npm run build:css && concurrently \"npm run watch:css\" \"vite\"",
+    "start": "npm run build:css && concurrently \"npm run watch:css\" \"vite --port 5175\"",
     "watch:css": "npx tailwindcss -i ./src/index.css -o ./src/styles.css --watch",
     "build:css": "npx tailwindcss -i ./src/index.css -o ./src/styles.css",
     "build": "tsc && npm run build:css && vite build",

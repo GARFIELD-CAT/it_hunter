@@ -2,6 +2,8 @@ import Button from '@/components/Button';
 import useAuthStore from '@/store/useAuthStore';
 
 import Logo from '@/assets/svg/logo.svg';
+import { NavLink } from 'react-router-dom';
+import ErrorBoundary from './ErrorBoundary';
 
 const Header = () => {
   const { isAuthenticated, setIsAuthenticated } = useAuthStore(

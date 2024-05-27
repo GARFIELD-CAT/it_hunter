@@ -4,17 +4,20 @@ import Header from './components/Header';
 import Router from './routes';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
+import ErrorBoundary from './components/ErrorBoundary';
 
 function App() {
   const queryClient = new QueryClient();
   return (
-    <QueryClientProvider client={queryClient}>
-      <div className="App font-mono h-screen">
-        <Header />
-        <Router />
-      </div>
-      <ToastContainer />
-    </QueryClientProvider>
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <div className="App font-mono h-screen flex flex-col items-stretch w-full">
+          <Header />
+          <Router />
+        </div>
+        <ToastContainer />
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 }
 
