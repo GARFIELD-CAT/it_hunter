@@ -109,6 +109,7 @@ export const CompaniesList = ({ className }: { className?: string }) => {
       <div className="grid gap-12 grid-cols-2">
         {MOCK_COMPANIES.map((company) => (
           <CompanyCard
+            to={`/company/${company.id}`}
             key={company.id}
             companyLogoSrc={company.logo}
             companyName={company.name}

@@ -27,6 +27,7 @@ export const CompanySection = ({ className }: { className?: string }) => {
       <div className="grid gap-x-16 gap-y-12 grid-cols-2 mt-[3rem]">
         {MOCK_COMPANIES.map((company) => (
           <CompanyCard
+            to={`/company/${company.id}`}
             key={company.id}
             companyLogoSrc={company.logo}
             companyName={company.name}

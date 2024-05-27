@@ -4,6 +4,7 @@ import Vacancies from '@/pages/Vacancies/Vacancies';
 import Companies from '@/pages/Companies/Companies';
 import Header from '@/components/Header';
 import { Vacancy } from '@/pages/Vacancy/Vacancy';
+import { Company } from '@/pages/Company/Company';
 
 const Router = () => (
   <BrowserRouter>
@@ -14,6 +15,7 @@ const Router = () => (
         <Route path="/vacancies" element={<Vacancies />} />
         <Route path="vacancy/:id" element={<Vacancy />} />
         <Route path="/companies" element={<Companies />} />
+        <Route path="/company/:id" element={<Company />} />
         <Route path="*" element={<div>404</div>} />
       </Routes>
     </div>

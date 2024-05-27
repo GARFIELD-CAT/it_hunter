@@ -16,6 +16,7 @@ export const VacanciesList = ({ className }: { className?: string }) => {
       <div className="mt-6 flex flex-col items-stretch gap-6">
         {MOCK_COMPANIES.map((company) => (
           <VacancyCard
+            to={`/vacancy/${company.id}`}
             key={company.id}
             companyLogoSrc={company.logo}
             companyName={company.name}
