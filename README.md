@@ -13,18 +13,21 @@
 - Перейдите в папку backend
 - Создайте файл .env с данными переменных окружения на основе шаблона template.env. Сейчас достаточно просто убрать "template"
 - Запустите docker контейнер ```docker-compose up``` для разворачивания базы данных
-- Создайте миграции базы данных ```python backend\manage.py makemigrations```
-- Проведите миграции базы данных ```python backend\manage.py migrate```
+- Разверните venv окружение ```python -m venv venv```
+- Активировать venv окружение ```venv\Scripts\activate.bat```
+- Установите зависимости ```pip install -r requirements.txt```
+- Создайте миграции базы данных ```python manage.py makemigrations```
+- Проведите миграции базы данных ```python manage.py migrate```
 - Загрузите начальные данные в БД
-- Запуск сервера ```python backend\manage.py runserver```
+- Запуск сервера ```python manage.py runserver```
 - Можно работать
 ### Работа с админкой
-- Создайте суперпользователя для работы ```docker-compose exec web python manage.py createsuperuser```
 - Админка расположена по адресу http://127.0.0.1/admin
 - - username = admin
-- - password = 123456
+- - password = 123
+- Если нужно. Создание суперпользователя для работы ```python manage.py createsuperuser```
 ### Заполнение базы начальными данными
 - Запустите проект
-- Заполнение данными ```python backend\manage.py loaddata data/ithunter.json```
+- Заполнение данными ```python manage.py loaddata data/ithunter.json```
 ### Авторы
 Команда 7
