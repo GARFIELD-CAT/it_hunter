@@ -14,7 +14,7 @@ const Vacancies = () => {
         </h1>
         <div className="flex items-start gap-6 mt-6">
           <Filters />
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center flex-1">
             <Search />
             <VacanciesList />
           </div>

@@ -1,6 +1,7 @@
 import { CompanyCard } from '@/components/CompanyCard';
 import { VacancyCard } from '@/components/VacancyCard';
 import { ICompanyShort } from '@/types/company';
+import { useGlobalVacanciesQuery } from '../../useVacancies';
 
 const MOCK_COMPANIES: Array<ICompanyShort> = new Array(14).fill({
   id: '1',
@@ -11,16 +12,21 @@ const MOCK_COMPANIES: Array<ICompanyShort> = new Array(14).fill({
 });
 
 export const VacanciesList = ({ className }: { className?: string }) => {
+  const { data } = useGlobalVacanciesQuery();
+
   return (
     <>
-      <div className="mt-6 flex flex-col items-stretch gap-6">
-        {MOCK_COMPANIES.map((company) => (
+      <div className="mt-6 flex flex-col items-stretch gap-6 w-full">
+        {data?.results?.map((company) => (
           <VacancyCard
             to={`/vacancy/${company.id}`}
             key={company.id}
-            companyLogoSrc={company.logo}
+            companyLogoSrc="https://logos-download.com/wp-content/uploads/2022/01/Maker_MKR_Logo.png"
             companyName={company.name}
             description={company.description}
+            skills={company.tags.map((tag) => tag.name)}
+            city={company.locations[0].name}
+            salary={company.salary}
           />
         ))}
       </div>
