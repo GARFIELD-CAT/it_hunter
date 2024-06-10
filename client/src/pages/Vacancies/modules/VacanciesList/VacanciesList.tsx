@@ -24,7 +24,7 @@ export const VacanciesList = ({ className }: { className?: string }) => {
             companyLogoSrc="https://logos-download.com/wp-content/uploads/2022/01/Maker_MKR_Logo.png"
             companyName={company.name}
             description={company.description}
-            skills={company.tags.map((tag) => tag.name)}
+            skills={company.tags.map((tag) => tag.value)}
             city={company.locations[0].name}
             salary={company.salary}
           />

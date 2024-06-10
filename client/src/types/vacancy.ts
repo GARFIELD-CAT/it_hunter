@@ -2,7 +2,7 @@ export interface GetVacanciesResponse {
   count: number;
   next: string;
   previous: null;
-  results: Vacancy[];
+  results: IVacancy[];
 }
 
 export interface GetVacanciesProps {
@@ -10,23 +10,23 @@ export interface GetVacanciesProps {
   page: number;
 }
 
-export interface Vacancy {
+export interface IVacancy {
   id: number;
   name: string;
-  locations: Location[];
+  locations: ICommonType[];
   salary: Salary;
-  type: Location;
+  type: ICommonType;
   published_at: string;
   created_at: string;
   archived: boolean;
   url: string;
   employer: Employer;
-  schedule: Location;
-  employment: Location;
-  experience: Location;
+  schedule: ICommonType;
+  employment: ICommonType;
+  experience: ICommonType;
   description: string;
   snippet: string;
-  tags: Location[];
+  tags: ICommonType[];
 }
 
 interface Employer {
@@ -45,7 +45,7 @@ interface Salary {
   value: string;
 }
 
-interface Location {
+interface ICommonType {
   id: number;
   name: string;
   value: string;

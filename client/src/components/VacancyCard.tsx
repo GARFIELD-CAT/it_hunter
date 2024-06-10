@@ -1,11 +1,11 @@
-import { Vacancy } from '@/types/vacancy';
+import { IVacancy } from '@/types/vacancy';
 import { BaseCard, IBaseCardProps } from './BaseCard';
 
 interface ICompanyCardProps extends Omit<IBaseCardProps, 'content'> {
   description: string;
   city?: string;
   skills?: string[];
-  salary?: Vacancy['salary'];
+  salary?: IVacancy['salary'];
 }
 
 export const VacancyCard = ({
