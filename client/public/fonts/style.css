@@ -1,0 +1,8 @@
+@font-face {
+  font-family: 'Sans Serif';
+  src: url('./microsoftsansserif.ttf');
+}
+
+* {
+  font-family: 'Sans Serif', Arial, sans-serif;
+}
