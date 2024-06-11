@@ -70,7 +70,7 @@ export const Select = ({ options }: { options: string[] }) => {
               <button
                 onClick={() => selectValue(item)}
                 key={i}
-                className="flex items-center gap-1 px-8 py-4 hover:bg-[#eee] cursor-pointer w-full"
+                className="flex items-center gap-1 px-8 py-4 hover:bg-[#eee] cursor-pointer w-full select-none"
               >
                 <div className="text-neutral-950">{item}</div>
               </button>
