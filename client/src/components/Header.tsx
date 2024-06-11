@@ -48,10 +48,10 @@ const Header = () => {
             </Link>
           ) : (
             <div className="flex items-center gap-4">
-              <Link to="/profile">
+              <Link to="/company/1">
                 <img
-                  src="https://randomuser.me/api/portraits/men/39.jpg"
-                  className="w-10 h-10 rounded-full"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjTMVi5RXHTZRVlGD7EnaUgzXow8h-nfvg5A&s"
+                  className="w-10 h-10 rounded-full object-cover object-center"
                 />
               </Link>
               <button

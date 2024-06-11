@@ -42,7 +42,7 @@ export const HeroSection = () => {
             <p className="text-[0.96875rem] font-normal leading-[1.4rem]">
               {section.text}
             </p>
-            <div className="opacity-0 absolute z-10 size-full left-0 top-0 text-[6rem] group-hover:opacity-100 transition-all duration-200 delay-100 text-white bg-black">
+            <div className="opacity-0 absolute z-10 size-full left-0 top-0 text-[6rem] group-hover:opacity-100 transition-all duration-200 text-white bg-black">
               →
             </div>
           </div>

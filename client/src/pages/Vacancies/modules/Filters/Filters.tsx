@@ -1,4 +1,7 @@
-import PlusBtnSvg from "@/assets/svg/plus-btn.svg";
+import { Select } from "@/components/Select";
+
+const MockLocations = ["Москва", "Санкт-Петербург"];
+const MockSpheres = ["IT", "Маркетинг", "Продажи", "Дизайн", "Финансы"];
 
 export const Filters = () => (
   <div className="flex min-w-[24rem] flex-col items-start gap-4 p-8 rounded-3xl bg-white sticky top-4">
@@ -10,35 +13,13 @@ export const Filters = () => (
         <div className="flex flex-col items-start text-[#808080] text-sm leading-[1.3125rem]">
           Локация:
         </div>
-        <div className="flex flex-col items-start self-stretch">
-          <div className="flex justify-center items-start">
-            <div className="flex items-center gap-1">
-              <div className="flex flex-col items-center text-neutral-950 text-center leading-6">
-                Выбрать
-              </div>
-              <button>
-                <img src={PlusBtnSvg} alt="plus-btn" />
-              </button>
-            </div>
-          </div>
-        </div>
+        <Select options={MockLocations} />
       </div>
       <div className="flex flex-col items-start gap-1 self-stretch">
         <div className="flex flex-col items-start text-[#808080] text-sm leading-[1.3125rem]">
           Сфера:
         </div>
-        <div className="flex flex-col items-start self-stretch">
-          <div className="flex justify-center items-start">
-            <div className="flex items-center gap-1">
-              <div className="flex flex-col items-center text-neutral-950 text-center leading-6">
-                Выбрать
-              </div>
-              <button>
-                <img src={PlusBtnSvg} alt="plus-btn" />
-              </button>
-            </div>
-          </div>
-        </div>
+        <Select options={MockSpheres} />
       </div>
     </div>
     <div className="flex items-center self-stretch">

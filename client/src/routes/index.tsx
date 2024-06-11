@@ -9,7 +9,7 @@ import Login from "@/pages/Login";
 
 const Router = () => (
   <BrowserRouter>
-    <div className="h-screen flex flex-col items-stretch w-full">
+    <div className="min-h-screen flex flex-col items-stretch w-full">
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />

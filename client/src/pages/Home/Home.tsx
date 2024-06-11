@@ -1,12 +1,12 @@
-import { Container } from '@/components/Container';
+import { Container } from "@/components/Container";
 import {
   HeroSection,
   CompanySection,
   AddCompanyForm,
   VacanciesSection,
   SubscribeForm,
-} from './modules';
-import { Footer } from '@/components/Footer';
+} from "./modules";
+import { Footer } from "@/components/Footer";
 
 const Home = () => {
   return (
