@@ -1,12 +1,22 @@
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from "@tanstack/react-query";
 import {
   type GetVacanciesResponse,
   type GetVacanciesProps,
-} from '@/types/vacancy';
-import { getVacancies } from '../api/vacancies.service';
+} from "@/types/vacancy";
+import { getVacancies } from "../api/vacancies.service";
 
 export const useVacanciesQuery = (params: GetVacanciesProps) =>
-  useQuery<GetVacanciesResponse>(['getVacancies', { params }], async () => {
-    const res = await getVacancies(params);
-    return res;
-  });
+  useInfiniteQuery<GetVacanciesResponse>(
+    ["getVacancies", { params }],
+    async ({ pageParam = 1 }) => {
+      const res = await getVacancies({
+        page: pageParam,
+      });
+      return res;
+    },
+    {
+      getNextPageParam: (lastPage, allPages) => {
+        return lastPage.next ? allPages.length + 1 : undefined;
+      },
+    }
+  );

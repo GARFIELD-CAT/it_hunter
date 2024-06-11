@@ -7,7 +7,7 @@ export interface GetVacanciesResponse {
 
 export interface GetVacanciesProps {
   search?: string;
-  page: number;
+  page?: number;
 }
 
 export interface IVacancy {
