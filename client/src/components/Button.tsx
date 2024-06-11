@@ -1,5 +1,6 @@
 import Spinner from "@/components/Spinner";
 import clsx from "clsx";
+import { text } from "stream/consumers";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -9,9 +10,8 @@ export interface ButtonProps
   children?: React.ReactNode;
 }
 
-const defaultClasses = `
-flex flex-shrink-0 justify-center items-center py-3 px-6 h-12 rounded-md bg-black text-white text-neutral-950 text-center text-[.9375rem] leading-6
-  `;
+const defaultClasses =
+  "flex flex-shrink-0 justify-center items-center py-3 px-6 h-12 rounded-md bg-black text-white text-neutral-950 text-center text-[.9375rem] leading-6";
 
 const Button: React.FC<ButtonProps> = ({
   text,
@@ -19,10 +19,17 @@ const Button: React.FC<ButtonProps> = ({
   className,
   children,
   ...props
-}) => (
-  <button type="button" className={clsx(defaultClasses, className)} {...props}>
-    {isLoading ? <Spinner /> : children ?? text}
-  </button>
-);
+}) => {
+  console.log("🚀 ~ className:", className);
+  return (
+    <button
+      type="button"
+      className={clsx(defaultClasses, className)}
+      {...props}
+    >
+      {isLoading ? <Spinner /> : children ?? text}
+    </button>
+  );
+};
 
 export default Button;

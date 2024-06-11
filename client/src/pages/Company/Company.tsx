@@ -6,14 +6,17 @@ export const Company = () => (
       <div className="flex flex-col items-start w-[1184px] max-w-[1184px]">
         <div className="flex flex-col items-start gap-12 self-stretch">
           <div className="div_hidden-uploadcare flex flex-col items-start self-stretch">
-            <div className="lightgray 0px -0.308px / 100% 100.217% no-repeat] self-stretch h-[17.75rem] max-w-[1184px] rounded-3xl bg-[url('https://oborot.ru/wp-content/uploads/2022/09/avito-1024x683.jpg')]"></div>
-            <div className="self-stretch h-[392px] rounded-3xl bg-white">
+            <img
+              src="https://oborot.ru/wp-content/uploads/2022/09/avito-1024x683.jpg"
+              className="object-cover object-center lightgray 0px -0.308px / 100% 100.217% no-repeat] self-stretch h-[17.75rem] max-w-[1184px] rounded-3xl"
+            />
+            <div className="self-stretch -mt-9 h-[392px] rounded-3xl bg-white py-12 px-16">
               <div className="flex items-start w-[1088px]">
                 <div className="div_w-full flex flex-col items-start gap-4 self-stretch pb-[1.3125rem]">
-                  <div className="flex flex-col items-start self-stretch self-stretch text-neutral-950 text-[2.5rem] leading-[56px]">
+                  <div className="flex flex-col items-start self-stretch text-neutral-950 text-[2.5rem] leading-[56px]">
                     Avito
                   </div>
-                  <div className="flex flex-col items-start self-stretch self-stretch text-neutral-950 text-[.9375rem] leading-[1.375rem]">
+                  <div className="flex flex-col items-start self-stretch text-neutral-950 text-[.9375rem] leading-[1.375rem]">
                     Международная IT-компания, которая разрабатывает умные
                     продукты и сервисы на основе машинного обучения.
                   </div>
@@ -67,7 +70,7 @@ export const Company = () => (
               <div className="flex items-start w-[1088px]">
                 <div className="flex items-center self-stretch">
                   <div className="flex flex-col items-start pt-[0.1875rem] pb-[0.1875rem] px-0">
-                    <div className="button___link flex justify-center items-center w-[8.5rem] h-[1.125rem] bg-white/0 flex flex-col flex-shrink-0 justify-center w-[8.5rem] h-6 text-neutral-950 text-center leading-6">
+                    <div className="button___link flex justify-center items-center w-[8.5rem] h-[1.125rem] bg-white/0 flex-col flex-shrink-0 h-6 text-neutral-950 text-center leading-6">
                       Работа в Avito
                     </div>
                   </div>
@@ -173,24 +176,16 @@ export const Company = () => (
               <div className="flex flex-col items-center self-stretch">
                 <div className="flex flex-col items-start py-6 px-0 w-[1184px] max-w-[1184px]">
                   <div className="flex justify-center items-start gap-12 self-stretch">
-                    <div className="flex flex-col justify-center items-start w-[444.8px] h-96 rounded-3xl">
-                      <div className="image-2 lightgray 0px -38.854px / 100% 120.237% no-repeat] self-stretch max-w-[444.8px] rounded-3xl bg-[url('https://oborot.ru/wp-content/uploads/2022/09/avito-1024x683.jpg')]"></div>
-                    </div>
-                    <div className="flex flex-col justify-center items-start w-[691.2px] h-96 rounded-3xl">
-                      <div className="image-3 lightgray 0px -110.062px / 100% 157.324% no-repeat] self-stretch max-w-[691.2px] rounded-3xl bg-[url('https://oborot.ru/wp-content/uploads/2022/09/avito-1024x683.jpg')]"></div>
-                    </div>
+                    <div className="flex flex-col justify-center items-start w-[444.8px] h-96 rounded-3xl image-2 lightgray 0px -38.854px / 100% 120.237% no-repeat] self-stretch max-w-[444.8px] rounded-3xl bg-[url('https://oborot.ru/wp-content/uploads/2022/09/avito-1024x683.jpg')]"></div>
+                    <div className="flex flex-col justify-center items-start w-[691.2px] h-96 rounded-3xl image-3 lightgray 0px -110.062px / 100% 157.324% no-repeat] self-stretch max-w-[691.2px] rounded-3xl bg-[url('https://oborot.ru/wp-content/uploads/2022/09/avito-1024x683.jpg')]"></div>
                   </div>
                 </div>
               </div>
               <div className="flex flex-col items-center self-stretch">
                 <div className="flex flex-col items-start py-6 px-0 w-[1184px] max-w-[1184px]">
                   <div className="flex justify-center items-start gap-12 self-stretch">
-                    <div className="flex flex-col justify-center items-start w-[691.19px] h-96 rounded-3xl">
-                      <div className="image-4 lightgray 0px -100.587px / 100% 152.389% no-repeat] self-stretch max-w-[691.19px] rounded-3xl bg-[url('https://oborot.ru/wp-content/uploads/2022/09/avito-1024x683.jpg')]"></div>
-                    </div>
-                    <div className="flex flex-col justify-center items-start w-[444.81px] h-96 rounded-3xl">
-                      <div className="image-5 lightgray 0px -19.871px / 100% 110.35% no-repeat] self-stretch max-w-[444.81px] rounded-3xl bg-[url('https://oborot.ru/wp-content/uploads/2022/09/avito-1024x683.jpg')]"></div>
-                    </div>
+                    <div className="flex flex-col justify-center items-start w-[691.19px] h-96 rounded-3xl image-4 lightgray 0px -100.587px / 100% 152.389% no-repeat] self-stretch max-w-[691.19px] rounded-3xl bg-[url('https://oborot.ru/wp-content/uploads/2022/09/avito-1024x683.jpg')]"></div>
+                    <div className="flex flex-col justify-center items-start w-[444.81px] h-96 rounded-3xl image-5 lightgray 0px -19.871px / 100% 110.35% no-repeat] self-stretch max-w-[444.81px] rounded-3xl bg-[url('https://oborot.ru/wp-content/uploads/2022/09/avito-1024x683.jpg')]"></div>
                   </div>
                 </div>
               </div>
@@ -327,36 +322,24 @@ export const Company = () => (
               <div className="flex flex-col items-center self-stretch">
                 <div className="flex flex-col items-start py-6 px-0 w-[1184px] max-w-[1184px]">
                   <div className="flex justify-center items-start gap-12 self-stretch">
-                    <div className="flex flex-col justify-center items-start w-[444.8px] h-96 rounded-3xl">
-                      <div className="image-6 lightgray -65.78px 0px / 129.577% 100% no-repeat] self-stretch max-w-[444.8px] rounded-3xl bg-[url('https://oborot.ru/wp-content/uploads/2022/09/avito-1024x683.jpg')]"></div>
-                    </div>
-                    <div className="flex flex-col justify-center items-start w-[691.2px] h-96 rounded-3xl">
-                      <div className="image-7 lightgray 0px -38.428px / 100% 120.015% no-repeat] self-stretch max-w-[691.2px] rounded-3xl bg-[url('https://oborot.ru/wp-content/uploads/2022/09/avito-1024x683.jpg')]"></div>
-                    </div>
+                    <div className="flex flex-col justify-center items-start w-[444.8px] h-96 rounded-3xlimage-6 lightgray -65.78px 0px / 129.577% 100% no-repeat] self-stretch max-w-[444.8px] rounded-3xl bg-[url('https://oborot.ru/wp-content/uploads/2022/09/avito-1024x683.jpg')]"></div>
+                    <div className="flex flex-col justify-center items-start w-[691.2px] h-96 rounded-3xl image-7 lightgray 0px -38.428px / 100% 120.015% no-repeat] self-stretch max-w-[691.2px] rounded-3xl bg-[url('https://oborot.ru/wp-content/uploads/2022/09/avito-1024x683.jpg')]"></div>
                   </div>
                 </div>
               </div>
               <div className="flex flex-col items-center self-stretch">
                 <div className="flex flex-col items-start py-6 px-0 w-[1184px] max-w-[1184px]">
                   <div className="flex justify-center items-start gap-12 self-stretch">
-                    <div className="flex flex-col justify-center items-start w-[691.19px] h-96 rounded-3xl">
-                      <div className="image-8 lightgray 0px -38.577px / 100% 120.092% no-repeat] self-stretch max-w-[691.19px] rounded-3xl bg-[url('https://oborot.ru/wp-content/uploads/2022/09/avito-1024x683.jpg')]"></div>
-                    </div>
-                    <div className="flex flex-col justify-center items-start w-[444.81px] h-96 rounded-3xl">
-                      <div className="image-9 lightgray -65.775px 0px / 129.574% 100% no-repeat] self-stretch max-w-[444.81px] rounded-3xl bg-[url('https://oborot.ru/wp-content/uploads/2022/09/avito-1024x683.jpg')]"></div>
-                    </div>
+                    <div className="flex flex-col justify-center items-start w-[691.19px] h-96 rounded-3xl image-8 lightgray 0px -38.577px / 100% 120.092% no-repeat] self-stretch max-w-[691.19px] rounded-3xl bg-[url('https://oborot.ru/wp-content/uploads/2022/09/avito-1024x683.jpg')]"></div>
+                    <div className="flex flex-col justify-center items-start w-[444.81px] h-96 rounded-3xl image-9 lightgray -65.775px 0px / 129.574% 100% no-repeat] self-stretch max-w-[444.81px] rounded-3xl bg-[url('https://oborot.ru/wp-content/uploads/2022/09/avito-1024x683.jpg')]"></div>
                   </div>
                 </div>
               </div>
               <div className="flex flex-col items-center self-stretch">
                 <div className="flex flex-col items-start py-6 px-0 w-[1184px] max-w-[1184px]">
                   <div className="flex justify-center items-start gap-12 self-stretch">
-                    <div className="flex flex-col justify-center items-start w-[444.8px] h-96 rounded-3xl">
-                      <div className="image-10 lightgray -65.459px 0px / 129.433% 100% no-repeat] self-stretch max-w-[444.8px] rounded-3xl bg-[url('https://oborot.ru/wp-content/uploads/2022/09/avito-1024x683.jpg')]"></div>
-                    </div>
-                    <div className="flex flex-col justify-center items-start w-[691.2px] h-96 rounded-3xl">
-                      <div className="image-11 lightgray 0px -38.512px / 100% 120.059% no-repeat] self-stretch max-w-[691.2px] rounded-3xl bg-[url('https://oborot.ru/wp-content/uploads/2022/09/avito-1024x683.jpg')]"></div>
-                    </div>
+                    <div className="flex flex-col justify-center items-start w-[444.8px] h-96 rounded-3xl image-10 lightgray -65.459px 0px / 129.433% 100% no-repeat] self-stretch max-w-[444.8px] rounded-3xl bg-[url('https://oborot.ru/wp-content/uploads/2022/09/avito-1024x683.jpg')]"></div>
+                    <div className="flex flex-col justify-center items-start w-[691.2px] h-96 rounded-3xl image-11 lightgray 0px -38.512px / 100% 120.059% no-repeat] self-stretch max-w-[691.2px] rounded-3xl bg-[url('https://oborot.ru/wp-content/uploads/2022/09/avito-1024x683.jpg')]"></div>
                   </div>
                 </div>
               </div>
