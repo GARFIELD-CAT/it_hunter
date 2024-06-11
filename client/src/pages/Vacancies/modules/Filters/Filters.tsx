@@ -12,7 +12,7 @@ export const Filters = () => (
         </div>
         <div className="flex flex-col items-start self-stretch">
           <div className="flex justify-center items-start">
-            <div className="flex items-center">
+            <div className="flex items-center gap-1">
               <div className="flex flex-col items-center text-neutral-950 text-center leading-6">
                 Выбрать
               </div>
@@ -29,7 +29,7 @@ export const Filters = () => (
         </div>
         <div className="flex flex-col items-start self-stretch">
           <div className="flex justify-center items-start">
-            <div className="flex items-center">
+            <div className="flex items-center gap-1">
               <div className="flex flex-col items-center text-neutral-950 text-center leading-6">
                 Выбрать
               </div>
