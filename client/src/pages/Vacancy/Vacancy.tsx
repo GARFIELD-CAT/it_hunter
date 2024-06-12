@@ -1,79 +1,32 @@
-import { Container } from '@/components/Container';
-import { Footer } from '@/components/Footer';
-import type { IVacancy } from '@/types/vacancy';
-import { useNavigate } from 'react-router';
-
-const MOCK_VACANCY: IVacancy = {
-  id: 66,
-  name: 'Младший маркетолог в digital- агентство (junior интернет-маркетолог)',
-  published_at: '2024-06-03T19:04:39.061000Z',
-  created_at: '2024-06-03T19:04:39.061000Z',
-  locations: [
-    { id: 17, name: 'msk', value: 'Москва' },
-    { id: 18, name: 'yerevan', value: 'Ереван' },
-  ],
-  salary: { currency: 'RUR', id: 145, to: 123413, value: 'Рубли', _from: 100 },
-  type: { id: 7, name: 'open', value: 'Открытая' },
-  archived: false,
-  url: '',
-  employer: {
-    email: 'densis@yandex.ru',
-    first_name: 'Ягунов',
-    id: 2,
-    last_name: 'Денис',
-    username: 'denissya',
-  },
-  schedule: { id: 20, name: 'flexible', value: 'Гибкий график' },
-  employment: { id: 8, name: 'full', value: 'Полная занятость' },
-  experience: { id: 10, name: 'moreThan6', value: 'Более 6 лет' },
-  snippet: '',
-  tags: [
-    { id: 5, name: 'anlt', value: 'Маркетинг' },
-    { id: 4, name: 'dev', value: 'Реклама' },
-  ],
-  description: `Ищем талантливого специалиста junior уровня. Внимательного, ответственного, с щепоткой здорового перфекционизма.
-Опыт не так важен. Главное — желание развиваться!
-
-Привет, меня зовут Владимир Малюгин. Я руководитель Geeks — команда профи в performance-маркетинге. Знаем все о продвижении недвижимости и медицины.
-Приглашаю стать частью нашей команды!
-
-Если вы:
-Креативны, инициативны и готовы самостоятельно принимать решения, создавать инфоповоды и генерировать идеи для продвижения;
-Внимательны, пунктуальны и аккуратны во всём;
-Комфортно работаете в режиме многозадачности;
-Умеете договориться с любым человеком на выгодных условиях;
-Грамотно говорите/пишете на русском языке;
-Знаете базовые инструменты интернет-маркетинга и (в идеале) владеете ими;
-Следите за работой топовых агентств, изучаете кейсы, по-настоящему интересуетесь рекламным рынком;
-Быстро обучаетесь новому и хотите активно развиваться и расти.
-
-В команде опытных коллег вы будете:
-Создавать стабильный поток целевых лидов и анализировать эффективность источников их привлечения;
-Привлекать трафик с помощью рекламы, SEO, видео-контента и т.д.;
-Управлять email- и контент-маркетингом;
-Генерить идеи для постов, статей, лидмагнитов и придумывать СТА;
-Наполнять сайт, вести блог и придумывать конверсионные воронки;
-Обеспечивать присутствие спикеров агентства в отраслевых конференциях;
-Вести отчетность и анализировать результаты;
-Много учиться и быть в курсе новых сервисов и технологий.
-
-Мы предложим вам:
-Наставника — маркетолога с 16-ти летним опытом (предыдущие ученики теперь работают в Яндексе, Сколково, Тануки и т.д.);
-Прозрачную, понятную и всегда своевременную оплату труда;
-Удаленную работу. Можно работать из любой точки мира. В нашей команде работают ребята из нескольких стран;
-Гибкий график. Не обязательно быть за компьютером строго с 9 до 18. Главное оставаться на связи в рабочее время. Есть задачи, есть сроки, а дальше планируете время самостоятельно;
-Крупных клиентов и возможность «прокачать» свои навыки в составе экспертной команды;
-Постоянное развитие и участие в крутых проектах;
-
-Карьерный рост. Мы ищем человека, который сначала сам всему научится, а потом будет управлять командой и подрядчиками.
-
-В сопроводительном письме напишите, на какие каналы о digital-маркетинге вы подписаны или какие ресурсы читаете.`,
-};
+import { Container } from "@/components/Container";
+import { Footer } from "@/components/Footer";
+import { useVacancyQuery } from "@/services/queries/vacancy.query";
+import type { IVacancy } from "@/types/vacancy";
+import { useNavigate, useParams } from "react-router";
+import { formatDate, getSalary } from "@/lib/helper";
 
 export const Vacancy = () => {
   const navigate = useNavigate();
 
-  const vacancy = MOCK_VACANCY;
+  const { id } = useParams();
+
+  const { isLoading, data } = useVacancyQuery({ id });
+
+  if (isLoading && !data) {
+    return (
+      <div className="flex justify-center items-center w-full h-[50vh]">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-neutral-950"></div>
+      </div>
+    );
+  }
+
+  if (!data) {
+    return (
+      <div className="flex justify-center items-center w-full h-[50vh]">
+        <p>Вакансия не найдена</p>
+      </div>
+    );
+  }
 
   const {
     name,
@@ -83,7 +36,9 @@ export const Vacancy = () => {
     schedule,
     employment,
     experience,
-  } = vacancy;
+    published_at,
+    salary,
+  } = data;
 
   const handleBackButtonClick = () => {
     navigate(-1);
@@ -117,7 +72,7 @@ export const Vacancy = () => {
             </div>
           </div>
           <div className="flex flex-col items-start pl-6 text-gray-500 text-sm leading-[1.3125rem]">
-            Опубликована 20 апреля 2024
+            Опубликована {formatDate(published_at)}
           </div>
         </div>
 
@@ -214,9 +169,9 @@ export const Vacancy = () => {
                   Локация:
                 </div>
                 <div className="text-neutral-950 text-xs leading-6">
-                  {locations.map(({ value }) => (
+                  {locations?.map(({ value }, index) => (
                     <span className="text-neutral-950 text-[.9375rem] leading-6">
-                      {`${value} `}
+                      {index === 0 ? value : `, ${value}`}
                     </span>
                   ))}
                 </div>
@@ -225,19 +180,21 @@ export const Vacancy = () => {
                 </div>
                 <div className="flex items-center">
                   <div className="text-neutral-950 text-[.9375rem] leading-6">
-                    {`${employment.value} / ${schedule.value}`}
+                    {`${employment?.value} / ${schedule?.value}`}
                   </div>
                 </div>
                 <div className="mt-4 text-gray-500 text-[.8125rem] leading-[1.3125rem]">
                   Опыт:
                 </div>
                 <div className="text-neutral-950 text-[.9375rem] leading-6">
-                  {experience.value}
+                  {experience?.value}
                 </div>
                 <div className="mt-4 text-gray-500 text-[.8125rem] leading-[1.3125rem]">
                   Зарплата:
                 </div>
-                <div className="text-neutral-950 text-xs leading-6">—</div>
+                <div className="text-neutral-950 text-[.9375rem] leading-6">
+                  {getSalary(salary)}
+                </div>
               </div>
 
               <div className="response-block mt-6 bg-white p-6 rounded-3xl">
@@ -253,23 +210,21 @@ export const Vacancy = () => {
             </div>
           </div>
 
-          <div className="vacancy-description-block flex justify-center shrink lg:basis-8/12 min-w-96 w-full">
-            <div className="bg-white rounded-3xl p-6">
-              <div className="flex items-center pb-2">
-                {tags.map(({ value }) => (
-                  <div className="flex flex-col items-start pt-0 pb-2 pl-0 pr-2 max-w-[19.25rem]">
-                    <div className="flex flex-col items-start py-1 px-2 max-w-[18.75rem] rounded bg-neutral-200 text-neutral-950 text-sm leading-[0.875rem]">
-                      {value}
-                    </div>
+          <div className="vacancy-description-block flex flex-col justify-center shrink lg:basis-8/12 min-w-96 w-full bg-white rounded-3xl p-6">
+            <div className="flex items-center pb-2">
+              {tags?.map(({ value }) => (
+                <div className="flex flex-col items-start pt-0 pb-2 pl-0 pr-2 max-w-[19.25rem]">
+                  <div className="flex flex-col items-start py-1 px-2 max-w-[18.75rem] rounded bg-neutral-200 text-neutral-950 text-sm leading-[0.875rem]">
+                    {value}
                   </div>
-                ))}
-              </div>
-              <div className="text-neutral-950 text-5xl leading-[48px] mb-5">
-                {name}
-              </div>
-              <div className="space-y-6 text-neutral-950 text-sm leading-6 whitespace-pre-wrap">
-                {description}
-              </div>
+                </div>
+              ))}
+            </div>
+            <div className="text-neutral-950 text-5xl leading-[48px] mb-5">
+              {name}
+            </div>
+            <div className="space-y-6 text-neutral-950 text-sm leading-6 whitespace-pre-wrap">
+              {description}
             </div>
           </div>
         </div>
