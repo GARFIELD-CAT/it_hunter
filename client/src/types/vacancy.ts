@@ -10,17 +10,24 @@ export interface GetVacanciesProps {
   page?: number;
 }
 
+export interface GetVacancyResponse {
+  vacancy: IVacancy;
+}
+
+export interface GetVacancyProps {
+  id?: string;
+}
 export interface IVacancy {
   id: number;
   name: string;
   locations: ICommonType[];
-  salary: Salary;
+  salary: ISalary;
   type: ICommonType;
   published_at: string;
   created_at: string;
   archived: boolean;
   url: string;
-  employer: Employer;
+  employer: IEmployer;
   schedule: ICommonType;
   employment: ICommonType;
   experience: ICommonType;
@@ -29,7 +36,7 @@ export interface IVacancy {
   tags: ICommonType[];
 }
 
-interface Employer {
+interface IEmployer {
   id: number;
   email: string;
   username: string;
@@ -37,7 +44,7 @@ interface Employer {
   last_name: string;
 }
 
-interface Salary {
+export interface ISalary {
   id: number;
   _from: number;
   to: number;
