@@ -1,14 +1,24 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
-from django.contrib.auth.admin import UserAdmin
+
+from .models import CustomUser
 
 User = get_user_model()
 
 
-class CustomUserAdmin(UserAdmin):
-    list_display = ("id", "username", "email", "first_name", "last_name", "is_staff")
-    search_fields = ("username", "email", "first_name", "last_name")
-    list_filter = ("username", "email")
+class CustomUserAdmin(admin.ModelAdmin):
+    list_display = (
+        "id",
+        "first_name",
+        "last_name",
+        "email",
+        "date_joined",
+        "is_active",
+        "is_staff",
+    )
+    search_fields = ("email", "first_name")
+    list_filter = ("is_active",)
+    empty_value_display = "-пусто-"
 
 
-admin.site.register(User, CustomUserAdmin)
+admin.site.register(CustomUser, CustomUserAdmin)

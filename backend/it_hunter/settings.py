@@ -61,7 +61,9 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "django_filters",
     "corsheaders",
+    "phonenumber_field",
     "djoser",
+    "companies",
     "users",
     "vacancies",
 ]
@@ -175,4 +177,8 @@ AUTH_USER_MODEL = "users.CustomUser"
 
 DJOSER = {
     "LOGIN_FIELD": "email",
+}
+
+EXCEPTION_HANDLER = {
+    "it_hunter.backend.exceptions.custom_exception_handler",
 }

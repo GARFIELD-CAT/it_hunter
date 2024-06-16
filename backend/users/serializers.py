@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model, password_validation
+from phonenumber_field.validators import validate_international_phonenumber
 from rest_framework import serializers
 
 
@@ -10,13 +11,20 @@ class UserSerializers(serializers.ModelSerializer):
 
     class Meta:
         fields = (
-            "email",
             "id",
-            "username",
+            "email",
             "first_name",
             "last_name",
-            "password",
+            "phone",
         )
+        model = User
+
+
+class UserCreateSerializers(serializers.ModelSerializer):
+    """Сериализатор для создания пользователя."""
+
+    class Meta:
+        fields = ("email", "id", "first_name", "last_name", "phone", "password")
         model = User
         extra_kwargs = {"password": {"write_only": True}}
 
@@ -24,15 +32,6 @@ class UserSerializers(serializers.ModelSerializer):
         password_validation.validate_password(value, self.instance)
         return value
 
-
-class UserCreateSerializers(serializers.ModelSerializer):
-    """Сериализатор для создания пользователя."""
-
-    class Meta:
-        fields = ("email", "id", "username", "first_name", "last_name", "password")
-        model = User
-        extra_kwargs = {"password": {"write_only": True}}
-
-    def validate_password(self, value):
-        password_validation.validate_password(value, self.instance)
+    def validate_phone(self, value):
+        validate_international_phonenumber(value)
         return value

@@ -1,7 +1,31 @@
-from django.contrib.auth import get_user_model
 from django.db import models
 
-User = get_user_model()
+from django.apps import apps as django_apps
+
+
+def get_company_model():
+    return django_apps.get_model("companies", model_name="Company", require_ready=False)
+
+
+def get_sector_model():
+    return django_apps.get_model("companies", model_name="Sector", require_ready=False)
+
+
+def get_employees_number_model():
+    return django_apps.get_model(
+        "companies", model_name="EmployeesNumber", require_ready=False
+    )
+
+
+def get_link_model():
+    return django_apps.get_model("companies", model_name="Link", require_ready=False)
+
+
+Company = get_company_model()
+Sector = get_sector_model()
+EmployeesNumber = get_employees_number_model()
+Link = get_link_model()
+
 
 LOCATIONS = [
     ("msk", "Москва"),
@@ -252,11 +276,14 @@ class Vacancy(models.Model):
     )
 
     url = models.URLField(
-        verbose_name="урл вакансии", help_text="Заполните урл вакансии"
+        verbose_name="урл вакансии",
+        help_text="Заполните урл вакансии",
+        null=True,
+        blank=True,
     )
 
     employer = models.ForeignKey(
-        User,
+        Company,
         on_delete=models.CASCADE,
         related_name="vacancies",
         verbose_name="работодатель",
@@ -299,7 +326,7 @@ class Vacancy(models.Model):
     )
 
     snippet = models.TextField(
-        verbose_name="краткое описание акансии",
+        verbose_name="краткое описание вакансии",
         help_text="Заполните краткое описание вакансии",
     )
 

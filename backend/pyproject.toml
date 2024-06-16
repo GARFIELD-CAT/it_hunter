@@ -50,6 +50,8 @@ sqlparse = "^0.4.1"
 uritemplate = "^3.0.1"
 urllib3 = "^1.26.6"
 drf-writable-nested = "^0.7.0"
+django-phonenumber-field = "^7.3.0"
+django-phonenumbers = "^1.0.1"
 
 [build-system]
 requires = ["poetry-core"]
