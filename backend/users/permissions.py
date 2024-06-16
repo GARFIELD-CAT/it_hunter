@@ -1,7 +1,7 @@
 from rest_framework.permissions import IsAuthenticated
 
 
-class CurrentUserOrAdmin(IsAuthenticated):
+class CurrentUser(IsAuthenticated):
     def has_object_permission(self, request, view, obj):
         user = request.user
-        return user.is_staff or obj.pk == user.pk
+        return obj.pk == user.pk

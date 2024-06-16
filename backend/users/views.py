@@ -7,7 +7,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
 from .paginations import PageLimitResultsSetPagination
-from .permissions import CurrentUserOrAdmin
+from .permissions import CurrentUser
 from .serializers import UserCreateSerializers, UserSerializers
 
 User = get_user_model()
@@ -31,10 +31,10 @@ class CreateListUserViewSet(
         return UserSerializers
 
     def perform_create(self, serializer):
-        username = serializer.validated_data["username"]
+        email = serializer.validated_data["email"]
         password = serializer.validated_data["password"]
         serializer.save()
-        user = get_object_or_404(User, username=username)
+        user = get_object_or_404(User, email=email)
         user.set_password(password)
         user.save()
 
@@ -51,7 +51,7 @@ class UserViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
         serializer = self.get_serializer(self.request.user)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    @action(detail=False, methods=["post"], permission_classes=[CurrentUserOrAdmin])
+    @action(detail=False, methods=["post"], permission_classes=[CurrentUser])
     def set_password(self, request, *args, **kwargs):
         serializer = SetPasswordSerializer(
             data=request.data, context={"request": request}

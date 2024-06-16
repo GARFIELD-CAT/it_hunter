@@ -1,4 +1,4 @@
-from django.contrib.auth import get_user_model, password_validation
+from django.contrib.auth import get_user_model
 from drf_writable_nested import WritableNestedModelSerializer
 from rest_framework import serializers
 
@@ -12,38 +12,52 @@ from .models import (
     Experience,
     CURRENCIES,
     CURRENCIES_IDS,
+    Company,
+    Sector,
+    EmployeesNumber,
+    Link,
 )
 
 User = get_user_model()
 
 
-class EmployerSerializers(serializers.ModelSerializer):
-    """Сериализатор для работы с работодателем."""
-
-    class Meta:
-        fields = (
-            "id",
-            "email",
-            "username",
-            "first_name",
-            "last_name",
-            "password",
-        )
-
-        model = User
-        extra_kwargs = {"password": {"write_only": True}}
-
-    def validate_password(self, value):
-        password_validation.validate_password(value, self.instance)
-        return value
-
-
-class TagSerializers(serializers.ModelSerializer):
-    """Сериализатор для работы с тегами."""
+class EmployeesNumberSerializers(serializers.ModelSerializer):
+    """Сериализатор для работы с количеством сотрудников."""
 
     class Meta:
         fields = ("id", "name")
-        model = Tag
+        model = EmployeesNumber
+
+    def to_representation(self, instance):
+        data = dict()
+        data["id"] = instance.id
+        data["name"] = instance.name
+        data["value"] = instance.get_name_display()
+
+        return data
+
+
+class LinkSerializers(serializers.ModelSerializer):
+    """Сериализатор для работы со ссылками на ресурсы компании."""
+
+    class Meta:
+        fields = ("id", "name")
+        model = Link
+
+    def to_representation(self, instance):
+        data = dict()
+        data["id"] = instance.id
+        data["name"] = instance.name
+
+        return data
+
+
+class SectorSerializers(serializers.ModelSerializer):
+    """Сериализатор для работы с отраслями компании."""
+
+    class Meta:
+        fields = ("id", "name")
+        model = Sector
 
     def to_representation(self, instance):
         data = dict()
@@ -60,6 +74,44 @@ class LocationSerializers(serializers.ModelSerializer):
     class Meta:
         fields = ("id", "name")
         model = Location
+
+    def to_representation(self, instance):
+        data = dict()
+        data["id"] = instance.id
+        data["name"] = instance.name
+        data["value"] = instance.get_name_display()
+
+        return data
+
+
+class EmployerSerializers(serializers.ModelSerializer):
+    """Сериализатор для работы с работодателем."""
+
+    locations = LocationSerializers(read_only=True, many=True)
+    sector = SectorSerializers(read_only=True, many=True)
+    employees_number = EmployeesNumberSerializers(read_only=True)
+    links = LinkSerializers(read_only=True, many=True)
+
+    class Meta:
+        fields = (
+            "id",
+            "name",
+            "snippet",
+            "sector",
+            "employees_number",
+            "locations",
+            "links",
+            "logo",
+        )
+        model = Company
+
+
+class TagSerializers(serializers.ModelSerializer):
+    """Сериализатор для работы с тегами."""
+
+    class Meta:
+        fields = ("id", "name")
+        model = Tag
 
     def to_representation(self, instance):
         data = dict()

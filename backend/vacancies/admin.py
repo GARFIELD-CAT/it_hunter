@@ -16,7 +16,7 @@ from .models import (
 
 class VacancyAdmin(admin.ModelAdmin):
     list_display = (
-        "pk",
+        "id",
         "name",
         "salary",
         "type",

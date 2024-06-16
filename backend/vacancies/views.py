@@ -1,5 +1,6 @@
-from rest_framework import mixins, viewsets
+from rest_framework import mixins, viewsets, status
 from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
 
 from .models import (
     Tag,
@@ -9,7 +10,7 @@ from .models import (
     Employment,
     Schedule,
     Type,
-    Salary,
+    Company,
 )
 from .paginations import PageLimitResultsSetPagination
 from .permissions import AuthPostRetrieve, IsEmployerOrReadOnly
@@ -103,5 +104,21 @@ class VacancyViewSet(viewsets.ModelViewSet):
             return VacancyReadSerializers
         return VacancyWriteSerializers
 
+    def create(self, serializer):
+        company_queryset = Company.objects.filter(owner=self.request.user)
+
+        if not company_queryset:
+            return Response(
+                data={"errors:": "У текущего пользователя нет компании."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        else:
+            return super().create(self.request)
+
     def perform_create(self, serializer):
-        return serializer.save(employer=self.request.user)
+        company_queryset = Company.objects.filter(owner=self.request.user)
+
+        if company_queryset:
+            owner = company_queryset.get()
+
+            return serializer.save(employer=owner)

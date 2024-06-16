@@ -5,8 +5,9 @@ from rest_framework.routers import DefaultRouter
 from .views import CreateListUserViewSet, UserViewSet
 
 router = DefaultRouter()
-router.register(r"users", CreateListUserViewSet)
 router.register(r"users", UserViewSet)
+router.register(r"users", CreateListUserViewSet, basename="customuser_create")
+
 
 urlpatterns = [
     path("", include(router.urls)),
