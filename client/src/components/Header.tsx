@@ -1,7 +1,7 @@
-import useAuthStore from '@/store/useAuthStore';
+import useAuthStore from "@/store/useAuthStore";
 
-import Logo from '@/assets/svg/logo.svg';
-import { Link } from 'react-router-dom';
+import Logo from "@/assets/svg/logo.svg";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const { isAuthenticated, setIsAuthenticated } = useAuthStore(
@@ -39,9 +39,29 @@ const Header = () => {
               Работодателям
             </div>
           </div>
-          <button className="flex justify-center items-center self-stretch py-2 px-4 w-[5.0625rem] rounded-md bg-black text-white cursor-pointer leading-6 hover:opacity-50 transition-opacity">
-            Войти
-          </button>
+          {!isAuthenticated ? (
+            <Link
+              to="/login"
+              className="flex justify-center items-center self-stretch py-2 px-4 w-[5.0625rem] rounded-md bg-black text-white cursor-pointer leading-6 hover:opacity-50 transition-opacity"
+            >
+              Войти
+            </Link>
+          ) : (
+            <div className="flex items-center gap-4">
+              <Link to="/company/1">
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjTMVi5RXHTZRVlGD7EnaUgzXow8h-nfvg5A&s"
+                  className="w-10 h-10 rounded-full object-cover object-center"
+                />
+              </Link>
+              <button
+                onClick={() => setIsAuthenticated(false)}
+                className="flex justify-center items-center self-stretch py-2 px-4 w-[5.0625rem] rounded-md bg-black text-white cursor-pointer leading-6 hover:opacity-50 transition-opacity"
+              >
+                Выйти
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </nav>

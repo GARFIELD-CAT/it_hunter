@@ -1,10 +1,10 @@
-import { type InputHTMLAttributes } from 'react';
+import { type InputHTMLAttributes } from "react";
 import {
   type FieldErrors,
   type FieldValues,
   type Path,
   type UseFormRegister,
-} from 'react-hook-form';
+} from "react-hook-form";
 
 export interface Props<
   T extends FieldValues = FieldValues,
@@ -30,10 +30,11 @@ const Input = <T extends FieldValues, U extends FieldValues>({
   return (
     <div className="flex flex-col">
       <label className="flex" htmlFor={name}>
-        {label ?? ''}
+        {label ?? ""}
       </label>
+
       <input
-        className="border rounded-lg p-2 w-full mb-2"
+        className="self-stretch pt-[0.9375rem] pb-[0.9375rem] pl-[1.0625rem] pr-[1.0625rem] h-12 rounded-md border border-[#adadad] bg-transparent text-[#000] placeholder-[#adadad] text-sm leading-6"
         placeholder={placeholder}
         disabled={disabled}
         value={value}
@@ -41,7 +42,9 @@ const Input = <T extends FieldValues, U extends FieldValues>({
         {...rest}
       />
       {errors && errors[name as keyof U] && (
-        <span className="">{errors[name as keyof U]?.message as string}</span>
+        <span className="text-xs text-[#ff0000] mt-1" role="alert">
+          {errors[name as keyof U]?.message as string}
+        </span>
       )}
     </div>
   );

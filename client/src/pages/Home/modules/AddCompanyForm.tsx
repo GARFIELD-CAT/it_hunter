@@ -1,9 +1,10 @@
-import clsx from 'clsx';
+import Button from "@/components/Button";
+import clsx from "clsx";
 
 export const AddCompanyForm = ({ className }: { className?: string }) => (
   <div
     className={clsx(
-      'flex flex-col items-start gap-20 self-stretch p-12 rounded-3xl bg-neutral-950',
+      "flex flex-col items-start gap-20 self-stretch p-12 rounded-3xl bg-neutral-950",
       className
     )}
   >
@@ -43,24 +44,21 @@ export const AddCompanyForm = ({ className }: { className?: string }) => (
       </div>
     </div>
     <div className="flex flex-col items-start gap-3 self-stretch">
-      <div className="flex items-start self-stretch">
-        <div className="flex flex-col items-start pt-[0.9375rem] pb-[0.9375rem] pl-[1.3125rem] pr-[1.3125rem] flex-1 h-12 rounded-md border border-[#adadad]">
-          <div className="flex flex-col items-start self-stretch text-[#adadad] text-[.9375rem] leading-[normal]">
-            Email
-          </div>
-        </div>
-        <div className="flex flex-col items-start pl-3 flex-1 h-12">
-          <div className="flex flex-col flex-shrink-0 items-start self-stretch pt-[0.9375rem] pb-[0.9375rem] pl-[1.3125rem] pr-[1.3125rem] h-12 rounded-md border border-[#adadad]">
-            <div className="flex flex-col items-start self-stretch text-[#adadad] text-[.9375rem] leading-[normal]">
-              Название компании
-            </div>
-          </div>
-        </div>
-        <div className="flex flex-col items-start pl-3 h-12">
-          <div className="flex flex-shrink-0 justify-center items-center py-3 px-6 h-12 rounded-md bg-[#f3f3f3] text-neutral-950 text-center text-[.9375rem] leading-6">
-            Получить презентацию
-          </div>
-        </div>
+      <div className="flex items-start self-stretch gap-3">
+        <input
+          type="email"
+          className="flex flex-col items-start pt-[0.9375rem] pb-[0.9375rem] pl-[1.3125rem] pr-[1.3125rem] flex-1 h-12 rounded-md border border-[#adadad] bg-transparent text-white focus:outline outline-2 outline-white outline-offset-2"
+          placeholder="Email"
+        />
+        <input
+          type="company"
+          className="flex flex-col items-start pt-[0.9375rem] pb-[0.9375rem] pl-[1.3125rem] pr-[1.3125rem] flex-1 h-12 rounded-md border border-[#adadad] bg-transparent text-white focus:outline outline-2 outline-white outline-offset-2"
+          placeholder="Название компании"
+        />
+        <Button
+          className="!bg-[#f3f3f3] !text-neutral-950"
+          text="Получить презентацию"
+        />
       </div>
       <div className="flex flex-col items-start self-stretch text-[#adadad] text-[.8125rem] leading-[1.3125rem]">
         Нажимая на кнопку «Получить презентацию» вы соглашаетесь на обработку

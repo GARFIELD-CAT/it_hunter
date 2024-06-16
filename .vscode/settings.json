@@ -1,3 +1,23 @@
 {
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"i18n-ally.localesPaths": [
+		"backend/venv/lib/python3.11/site-packages/django_filters/locale",
+		"backend/venv/lib/python3.11/site-packages/djoser/locale",
+		"backend/venv/lib/python3.11/site-packages/rest_framework/locale",
+		"backend/venv/lib/python3.11/site-packages/rest_framework_simplejwt/locale",
+		"backend/venv/lib/python3.11/site-packages/django/conf/locale",
+		"backend/venv/lib/python3.11/site-packages/django/contrib/messages",
+		"backend/venv/lib/python3.11/site-packages/django/contrib/admindocs/locale",
+		"backend/venv/lib/python3.11/site-packages/django/contrib/admin/locale",
+		"backend/venv/lib/python3.11/site-packages/django/contrib/auth/locale",
+		"backend/venv/lib/python3.11/site-packages/django/contrib/flatpages/locale",
+		"backend/venv/lib/python3.11/site-packages/django/contrib/contenttypes/locale",
+		"backend/venv/lib/python3.11/site-packages/django/contrib/gis/locale",
+		"backend/venv/lib/python3.11/site-packages/django/contrib/postgres/locale",
+		"backend/venv/lib/python3.11/site-packages/django/contrib/humanize/locale",
+		"backend/venv/lib/python3.11/site-packages/django/contrib/redirects/locale",
+		"backend/venv/lib/python3.11/site-packages/django/contrib/sessions/locale",
+		"backend/venv/lib/python3.11/site-packages/django/contrib/sites/locale",
+		"backend/venv/lib/python3.11/site-packages/rest_framework/templates/rest_framework/docs/langs"
+	]
 }
