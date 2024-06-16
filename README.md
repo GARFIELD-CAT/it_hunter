@@ -57,7 +57,7 @@
 ## Работа с админкой
 
 - Админка расположена по адресу http://127.0.0.1/admin
-- - username = admin
+- - email = admin@gmail.com
 - - password = 123
 - Если нужно. Создание суперпользователя для работы `python manage.py createsuperuser`
 
