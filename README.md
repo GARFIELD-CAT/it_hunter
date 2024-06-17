@@ -42,7 +42,15 @@
 - Проведите миграции базы данных `python manage.py migrate`
 - Загрузите начальные данные в БД
 - Запуск сервера `python manage.py runserver`
+- Заполнение базы начальными данными `python manage.py loaddata data/ithunter.json`
 - Можно работать
+
+## Работа с админкой
+
+- Админка расположена по адресу http://127.0.0.1/admin
+- - email = admin@gmail.com
+- - password = 123
+- Если нужно. Создание суперпользователя для работы `python manage.py createsuperuser`
 
 ### Frontend
 
@@ -53,18 +61,6 @@
 - Перейдите в папку client командой `cd client`
 - Установите зависимости проекта командой `yarn`
 - После успешной установки запустите проект командой `yarn start`
-
-## Работа с админкой
-
-- Админка расположена по адресу http://127.0.0.1/admin
-- - email = admin@gmail.com
-- - password = 123
-- Если нужно. Создание суперпользователя для работы `python manage.py createsuperuser`
-
-## Заполнение базы начальными данными
-
-- Запустите проект
-- Заполнение данными `python manage.py loaddata data/ithunter.json`
 
 ## Авторы
 

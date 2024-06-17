@@ -125,10 +125,10 @@ class CompanyWriteSerializers(
         queryset=Sector.objects.all(), many=True, required=False
     )
     employees_number = serializers.PrimaryKeyRelatedField(
-        queryset=Sector.objects.all(), required=False
+        queryset=EmployeesNumber.objects.all(), required=False
     )
     links = serializers.PrimaryKeyRelatedField(
-        queryset=Sector.objects.all(), many=True, required=False
+        queryset=Link.objects.all(), many=True, required=False
     )
 
     class Meta:

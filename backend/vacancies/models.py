@@ -204,7 +204,6 @@ class Experience(models.Model):
 class Tag(models.Model):
     """Теги для вакансий."""
 
-    # TODO: Будет выбор из готового списка. Доделать зависимый выбор навыка от сферы
     name = models.CharField(
         verbose_name="название тега",
         choices=TAGS,

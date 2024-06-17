@@ -102,6 +102,7 @@ class EmployerSerializers(serializers.ModelSerializer):
             "locations",
             "links",
             "logo",
+            "startup",
         )
         model = Company
 

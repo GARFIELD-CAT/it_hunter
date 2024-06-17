@@ -2,6 +2,7 @@ from rest_framework import mixins, viewsets, status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
+from .filters import VacancyFilter
 from .models import (
     Tag,
     Vacancy,
@@ -98,6 +99,7 @@ class VacancyViewSet(viewsets.ModelViewSet):
     queryset = Vacancy.objects.all()
     pagination_class = PageLimitResultsSetPagination
     permission_classes = [AuthPostRetrieve, IsEmployerOrReadOnly]
+    filterset_class = VacancyFilter
 
     def get_serializer_class(self):
         if self.action in ("list", "retrieve"):
