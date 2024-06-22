@@ -31,7 +31,7 @@
 - Разверните venv окружение `py -3.9 -m venv venv`
 - Активировать venv окружение `.\venv\Scripts\activate.bat`
   - Если используется PowerShell `.\venv\Scripts\Activate.ps1`
-  - Если используете bash: `./venv/Scripts/Activate.bat`
+  - Если используете bash: `source ./venv/Scripts/activate`
 - Установить poetry `pip install poetry`
 - Установить зависимости `poetry install`
 - Создайте файл .env с данными переменных окружения на основе шаблона template.env. Сейчас достаточно просто убрать "template"
@@ -39,7 +39,7 @@
 - Перейдите в другое окно терминала
 - Активировать venv окружение `.\venv\Scripts\activate.bat`
   - Если используется PowerShell `.\venv\Scripts\Activate.ps1`
-  - Если используете bash: `./venv/Scripts/Activate.bat`
+  - Если используете bash: `source ./venv/Scripts/activate`
 - Создайте миграции базы данных `python manage.py makemigrations`
 - Проведите миграции базы данных `python manage.py migrate`
 - Загрузите начальные данные в БД
