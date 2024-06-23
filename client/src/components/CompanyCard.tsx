@@ -1,7 +1,7 @@
-import { BaseCard, IBaseCardProps } from './BaseCard';
+import { BaseCard, IBaseCardProps } from "./BaseCard";
 
-interface ICompanyCardProps extends Omit<IBaseCardProps, 'content'> {
-  description: string;
+interface ICompanyCardProps extends Omit<IBaseCardProps, "content"> {
+  description?: string;
 }
 
 export const CompanyCard = ({ description, ...rest }: ICompanyCardProps) => {

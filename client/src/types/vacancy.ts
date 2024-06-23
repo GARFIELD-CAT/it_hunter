@@ -57,3 +57,61 @@ interface ICommonType {
   name: string;
   value: string;
 }
+
+interface Result {
+  id: number;
+  name: string;
+  locations: Location[];
+  salary: Salary | Salary2 | null;
+  type: Location;
+  published_at: string;
+  created_at: string;
+  archived: boolean;
+  url: null;
+  employer: Employer;
+  schedule: Location | null;
+  employment: Location | null;
+  experience: Location | null;
+  description: string;
+  snippet: string;
+  tags: Location[];
+}
+
+interface Employer {
+  id: number;
+  name: string;
+  snippet: string;
+  sector: Location[];
+  employees_number: Location;
+  locations: Location[];
+  links: Link[];
+  logo: string;
+  startup: boolean;
+}
+
+interface Link {
+  id: number;
+  name: string;
+}
+
+interface Salary2 {
+  id: number;
+  _from: number;
+  to: number;
+  currency: string;
+  value: string;
+}
+
+interface Salary {
+  id: number;
+  _from: number;
+  to: null;
+  currency: string;
+  value: string;
+}
+
+interface Location {
+  id: number;
+  name: string;
+  value: string;
+}

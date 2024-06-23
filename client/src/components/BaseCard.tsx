@@ -1,10 +1,10 @@
-import Arrow from '@/assets/svg/arrow.svg';
-import src from 'concurrently';
-import { Link, LinkProps } from 'react-router-dom';
+import Arrow from "@/assets/svg/arrow.svg";
+import src from "concurrently";
+import { Link, LinkProps } from "react-router-dom";
 
-export interface IBaseCardProps extends Omit<LinkProps, 'content'> {
-  companyLogoSrc: string;
+export interface IBaseCardProps extends Omit<LinkProps, "content"> {
   companyName: string;
+  companyLogoSrc?: string;
   content: React.ReactNode;
   footer?: React.ReactNode;
 }
@@ -16,7 +16,7 @@ export const BaseCard = ({
   footer,
   ...rest
 }: IBaseCardProps) => {
-  console.log('🚀 ~ rest:', rest);
+  console.log("🚀 ~ rest:", rest);
   return (
     <Link
       {...rest}

@@ -1,5 +1,6 @@
 import { CompanyCard } from "@/components/CompanyCard";
 import { VacancyCard } from "@/components/VacancyCard";
+import { shortString } from "@/lib/helper";
 import { useGlobalVacanciesQuery } from "@/pages/Vacancies/useVacancies";
 import { ICompanyShort } from "@/types/company";
 import { Link } from "react-router-dom";
@@ -32,7 +33,7 @@ export const VacanciesSection = ({ className }: { className?: string }) => {
               key={vacancy.id}
               companyLogoSrc="https://logos-download.com/wp-content/uploads/2022/01/Maker_MKR_Logo.png"
               companyName={vacancy.name}
-              description={vacancy.description}
+              description={shortString(vacancy.description ?? "", 150)}
               skills={vacancy.tags.map((tag) => tag.value)}
               city={vacancy.locations[0].name}
               salary={vacancy.salary}

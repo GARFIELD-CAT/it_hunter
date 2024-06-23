@@ -17,3 +17,7 @@ export const getSalary = (salary: ISalary): string => {
 
   return from + to + salary.currency;
 };
+
+export const shortString = (str: string, length: number): string => {
+  return str.length > length ? str.slice(0, length) + "..." : str;
+};
