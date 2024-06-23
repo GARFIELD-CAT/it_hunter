@@ -8,6 +8,12 @@ export interface GetVacanciesResponse {
 export interface GetVacanciesProps {
   search?: string;
   page?: number;
+  name?: string; // e.g., "инженер"
+  locations?: string; // e.g., "Санкт-Петербург"
+  tags?: string; // e.g., "Разработка"
+  schedules?: string; // e.g., "Удаленная работа"
+  startup?: boolean; // e.g., true
+  description?: string; // e.g., "разработка"
 }
 
 export interface GetVacancyResponse {
@@ -40,7 +46,7 @@ interface IEmployer {
   id: number;
   employees_number: ICommonType;
   logo: string;
-  links?: Pick<ICommonType, 'id' | 'name'>[];
+  links?: Pick<ICommonType, "id" | "name">[];
   locations: ICommonType[];
   name: string;
   snippet: string;
@@ -61,4 +67,3 @@ interface ICommonType {
   name: string;
   value: string;
 }
-

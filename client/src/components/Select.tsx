@@ -14,10 +14,20 @@ import {
   useId,
 } from "@floating-ui/react";
 import clsx from "clsx";
+import { IFilterValue } from "@/types/filters";
 
-export const Select = ({ options }: { options: string[] }) => {
+export const Select = ({
+  value,
+  options,
+  placeholder,
+  onChange,
+}: {
+  value?: IFilterValue;
+  options: IFilterValue[];
+  placeholder?: string;
+  onChange?: (value: IFilterValue) => void;
+}) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [value, setValue] = useState("Выбрать");
 
   const { refs, floatingStyles, context } = useFloating({
     open: isOpen,
@@ -41,8 +51,8 @@ export const Select = ({ options }: { options: string[] }) => {
     role,
   ]);
 
-  const selectValue = (value: string) => {
-    setValue(value);
+  const selectValue = (value: IFilterValue) => {
+    onChange?.(value);
     setIsOpen(false);
   };
 
@@ -54,7 +64,9 @@ export const Select = ({ options }: { options: string[] }) => {
         type="button"
         className="flex items-center gap-1"
       >
-        <div className="text-neutral-950 text-center leading-6">{value}</div>
+        <div className="text-neutral-950 text-center leading-6">
+          {value ? value.value : placeholder}
+        </div>
         <img src={PlusBtnSvg} alt="plus-btn" />
       </button>
       {isOpen && (
@@ -66,13 +78,13 @@ export const Select = ({ options }: { options: string[] }) => {
               "flex z-10 flex-col items-start gap-1 rounded-2x top-full bg-white py-6 shadow-md rounded-md max-h-[10rem] overflow-auto w-max"
             )}
           >
-            {options.map((item, i) => (
+            {options.map((item) => (
               <button
                 onClick={() => selectValue(item)}
-                key={i}
+                key={item.id}
                 className="flex items-center gap-1 px-8 py-4 hover:bg-[#eee] cursor-pointer w-full select-none"
               >
-                <div className="text-neutral-950">{item}</div>
+                <div className="text-neutral-950">{item.value}</div>
               </button>
             ))}
           </div>

@@ -11,6 +11,7 @@ export const useVacanciesQuery = (params: GetVacanciesProps) =>
     async ({ pageParam = 1 }) => {
       const res = await getVacancies({
         page: pageParam,
+        ...params,
       });
       return res;
     },

@@ -1,11 +1,14 @@
-import { Container } from '@/components/Container';
+import { Container } from "@/components/Container";
 
-import { Footer } from '@/components/Footer';
-import { Filters } from './modules/Filters/Filters';
-import { Search } from '@/components/Search/Search';
-import { VacanciesList } from './modules/VacanciesList/VacanciesList';
+import { Footer } from "@/components/Footer";
+import { Filters } from "./modules/Filters/Filters";
+import { Search } from "@/components/Search/Search";
+import { VacanciesList } from "./modules/VacanciesList/VacanciesList";
+import { useVacanciesStore } from "./store";
 
 const Vacancies = () => {
+  const { setParams } = useVacanciesStore();
+
   return (
     <div className="flex flex-1 flex-col justify-between items-start">
       <Container className="mt-8 w-full h-full">
@@ -15,7 +18,7 @@ const Vacancies = () => {
         <div className="flex items-start gap-6 mt-6">
           <Filters />
           <div className="flex flex-col items-center flex-1">
-            <Search />
+            <Search onInput={(value) => setParams({ description: value })} />
             <VacanciesList />
           </div>
         </div>

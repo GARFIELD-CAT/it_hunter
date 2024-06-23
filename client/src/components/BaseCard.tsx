@@ -16,7 +16,6 @@ export const BaseCard = ({
   footer,
   ...rest
 }: IBaseCardProps) => {
-  console.log("🚀 ~ rest:", rest);
   return (
     <Link
       {...rest}

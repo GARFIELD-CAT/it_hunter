@@ -1,10 +1,16 @@
-import SearchIcon from '@/assets/svg/search.svg';
-import clsx from 'clsx';
+import SearchIcon from "@/assets/svg/search.svg";
+import clsx from "clsx";
 
-export const Search = ({ className }: { className?: string }) => (
+export const Search = ({
+  className,
+  onInput,
+}: {
+  className?: string;
+  onInput?: (value: string) => void;
+}) => (
   <div
     className={clsx(
-      'flex w-full gap-6 py-0 px-6 rounded-full bg-white',
+      "flex w-full gap-6 py-0 px-6 rounded-full bg-white",
       className
     )}
   >
@@ -15,6 +21,7 @@ export const Search = ({ className }: { className?: string }) => (
       placeholder="Например, дизайнер"
       type="text"
       className="py-[1.19rem] focus:outline-none placeholder:text-[#939393]"
+      onInput={(e) => onInput?.(e.currentTarget.value)}
     />
   </div>
 );
