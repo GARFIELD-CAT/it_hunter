@@ -6,7 +6,7 @@ export interface GetCompaniesResponse {
 }
 
 export interface GetCompaniesProps {
-  search?: string;
+  name?: string;
   page?: number;
 }
 

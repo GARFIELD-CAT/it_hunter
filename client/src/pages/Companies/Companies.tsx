@@ -4,10 +4,13 @@ import { Footer } from "@/components/Footer";
 import { Search } from "@/components/Search/Search";
 import { CompaniesList } from "./modules/CompaniesList/CompaniesList";
 import { useCompaniesQuery } from "@/services/queries/companies.query";
+import { useState } from "react";
 
 const Companies = () => {
+  const [search, setSearch] = useState("");
+
   const { data, hasNextPage, fetchNextPage } = useCompaniesQuery({
-    search: "",
+    name: search,
   });
 
   return (
@@ -16,7 +19,12 @@ const Companies = () => {
         <h1 className="text-[2.45119rem] text-left font-normal leading-[2.75rem]">
           Компании
         </h1>
-        <Search className="py-[.75rem] mt-6" />
+        <Search
+          onInput={(value) => {
+            setSearch(value);
+          }}
+          className="py-[.75rem] mt-6"
+        />
         <div className="w-full flex flex-col items-center">
           <CompaniesList
             data={data?.pages.map((page) => page.results).flat() || []}

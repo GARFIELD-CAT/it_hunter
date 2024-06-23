@@ -8,6 +8,7 @@ export const useCompaniesQuery = (params: GetCompaniesProps) =>
     async ({ pageParam = 1 }) => {
       const res = await getCompanies({
         page: pageParam,
+        ...params,
       });
       return res;
     },

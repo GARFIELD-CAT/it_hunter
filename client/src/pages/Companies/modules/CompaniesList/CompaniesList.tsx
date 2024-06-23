@@ -11,7 +11,7 @@ export const CompaniesList = ({
   data: ICompany[];
 }) => {
   return (
-    <div className={clsx("grid gap-12 grid-cols-2", className)}>
+    <div className={clsx("grid gap-12 grid-cols-2 w-full", className)}>
       {data.map((company) => (
         <CompanyCard
           to={`/company/${company.id}`}
