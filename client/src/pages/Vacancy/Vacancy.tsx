@@ -1,7 +1,6 @@
 import { Container } from "@/components/Container";
 import { Footer } from "@/components/Footer";
 import { useVacancyQuery } from "@/services/queries/vacancy.query";
-import type { IVacancy } from "@/types/vacancy";
 import { useNavigate, useParams } from "react-router";
 import { formatDate, getSalary } from "@/lib/helper";
 
@@ -38,10 +37,15 @@ export const Vacancy = () => {
     experience,
     published_at,
     salary,
+    employer,
   } = data;
 
   const handleBackButtonClick = () => {
     navigate(-1);
+  };
+
+  const handleGoToCompanyClick = () => {
+    navigate(`/company/${employer.id}`);
   };
 
   return (
@@ -81,56 +85,67 @@ export const Vacancy = () => {
             <div className="company-information-block flex flex-col min-w-96 w-full">
               <div className="bg-white p-6 rounded-3xl">
                 <div className="flex items-center">
-                  <div className="w-14 h-14 bg-cover rounded-full"></div>
-                  {/* style="background-image: url(<path-to-image>);" */}
+                  <div className="w-14 h-14 bg-cover rounded-full">
+                    <img src={employer.logo}></img>
+                  </div>
+
                   <div className="pl-4 text-neutral-950 text-xl">
-                    Digital Geeks
+                    {employer.name}
                   </div>
                 </div>
                 <div className="h-18">
                   <div className="text-neutral-950 text-[.9375rem] leading-6">
-                    Digital Geeks — агентство performance-маркетинга и
-                    интегратора digital-решений. Мы по-...
-                  </div>
-                  <div className="text-neutral-950 text-[.9375rem] leading-6">
-                    Читать дальше ↓
+                    {employer.snippet}
                   </div>
                 </div>
                 <div className="mt-4">
                   <div className="flex items-start">
                     <div className="text-neutral-950 leading-6">Секторы:</div>
-                    <div className="pl-3">
-                      <div className="text-neutral-950 leading-6">
-                        Агентство
+                    {employer.sector.map(({ id, value }) => (
+                      <div key={id} className="pl-3 text-neutral-950 leading-6">
+                        {value}
                       </div>
-                    </div>
+                    ))}
                   </div>
                   <div className="flex items-start mt-2">
                     <div className="text-neutral-950 text-[.9375rem] leading-6">
                       Сотрудники:
                     </div>
-                    <div className="pl-3">
-                      <div className="text-neutral-950 text-center text-[.9375rem] leading-6">
-                        до 15 человек
-                      </div>
+                    <div className="pl-3 text-neutral-950 text-center text-[.9375rem] leading-6">
+                      {employer.employees_number.value}
                     </div>
                   </div>
                   <div className="flex items-start mt-2">
                     <div className="text-neutral-950 text-[.9375rem] leading-6">
                       Локации:
                     </div>
-                    <div className="pl-3">
-                      <div className="text-neutral-950 leading-6">Москва</div>
-                    </div>
+                    {employer.locations?.map(({ id, value }) => (
+                      <div key={id} className="pl-3 text-neutral-950 leading-6">
+                        {value}
+                      </div>
+                    ))}
                   </div>
                 </div>
                 <div className="mt-4 flex justify-between items-center">
                   <div className="flex items-start">
-                    <div className="text-neutral-950 text-[.9375rem] leading-6">
-                      Digital Geeks
-                    </div>
+                    {employer.links?.map(({ id, name }) => {
+                      if (name.includes("t.me")) {
+                        return (
+                          <a
+                            key={id}
+                            href={name}
+                            className="underline text-neutral-950 text-[.9375rem] leading-6"
+                          >
+                            Telegram
+                          </a>
+                        );
+                      }
+                    })}
                   </div>
-                  <div className="p-1 w-8 h-8 bg-neutral-200 rounded-lg flex justify-center items-center">
+                  <button
+                    onClick={handleGoToCompanyClick}
+                    className="p-1 w-8 h-8 bg-neutral-200 rounded-lg flex justify-center items-center"
+                  >
                     <svg
                       width="24"
                       height="24"
@@ -160,7 +175,7 @@ export const Vacancy = () => {
                         </clipPath>
                       </defs>
                     </svg>
-                  </div>
+                  </button>
                 </div>
               </div>
 

@@ -9,7 +9,7 @@ export const formatDate = (date: Date | string): string => {
 };
 
 export const getSalary = (salary: ISalary): string => {
-  if (!salary._from && !salary.to) {
+  if (!salary || !salary._from && !salary.to) {
     return "-";
   }
   const from = salary._from ? `от ${salary._from} ` : "";
