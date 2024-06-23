@@ -34,3 +34,17 @@ export function createQueryString(params: Record<string, any>): string {
   });
   return searchParams.toString();
 }
+
+export function getLinkType(url: string): string {
+  if (url.includes('t.me/')) {
+    return 'Telegram';
+  } else if (url.includes('youtube.com/') || url.includes('youtu.be/')) {
+    return 'Youtube';
+  } else if (url.includes('vc.ru')) {
+    return 'vc.ru';
+  } else if (url.includes('vk.com')) {
+    return 'VK';
+  } else {
+    return 'Сайт';
+  }
+}

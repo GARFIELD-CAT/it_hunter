@@ -2,7 +2,7 @@ import { Container } from "@/components/Container";
 import { Footer } from "@/components/Footer";
 import { useVacancyQuery } from "@/services/queries/vacancy.query";
 import { useNavigate, useParams } from "react-router";
-import { formatDate, getSalary } from "@/lib/helper";
+import { formatDate, getLinkType, getSalary } from "@/lib/helper";
 
 export const Vacancy = () => {
   const navigate = useNavigate();
@@ -48,6 +48,8 @@ export const Vacancy = () => {
     navigate(`/company/${employer.id}`);
   };
 
+  console.log({ data });
+
   return (
     <div className="flex flex-1 flex-col justify-between items-start">
       <Container className="flex flex-col gap-5 items-start pb-16 w-full max-w-[1184px]">
@@ -71,7 +73,7 @@ export const Vacancy = () => {
           </button>
           <div className="w-px h-10 bg-gray-300" />
           <div className="flex flex-col items-start pl-6">
-            <div className="bg-neutral-200 text-neutral-950 text-sm leading-[14px] py-1 px-2 rounded">
+            <div className="bg-neutral-200 text-sm leading-[14px] py-1 px-2 rounded">
               Вакансия
             </div>
           </div>
@@ -89,58 +91,48 @@ export const Vacancy = () => {
                     <img src={employer.logo}></img>
                   </div>
 
-                  <div className="pl-4 text-neutral-950 text-xl">
+                  <div className="pl-4 font-medium text-xl">
                     {employer.name}
                   </div>
                 </div>
                 <div className="h-18">
-                  <div className="text-neutral-950 text-[.9375rem] leading-6">
-                    {employer.snippet}
-                  </div>
+                  <div className="leading-6">{employer.snippet}</div>
                 </div>
                 <div className="mt-4">
                   <div className="flex items-start">
-                    <div className="text-neutral-950 leading-6">Секторы:</div>
+                    <div className="leading-6">Секторы:</div>
                     {employer.sector.map(({ id, value }) => (
-                      <div key={id} className="pl-3 text-neutral-950 leading-6">
+                      <div key={id} className="pl-3 font-medium leading-6">
                         {value}
                       </div>
                     ))}
                   </div>
                   <div className="flex items-start mt-2">
-                    <div className="text-neutral-950 text-[.9375rem] leading-6">
-                      Сотрудники:
-                    </div>
-                    <div className="pl-3 text-neutral-950 text-center text-[.9375rem] leading-6">
+                    <div className="leading-6">Сотрудники:</div>
+                    <div className="pl-3 text-center font-medium leading-6">
                       {employer.employees_number.value}
                     </div>
                   </div>
                   <div className="flex items-start mt-2">
-                    <div className="text-neutral-950 text-[.9375rem] leading-6">
-                      Локации:
-                    </div>
+                    <div className="leading-6">Локации:</div>
                     {employer.locations?.map(({ id, value }) => (
-                      <div key={id} className="pl-3 text-neutral-950 leading-6">
+                      <div key={id} className="pl-3 font-medium leading-6">
                         {value}
                       </div>
                     ))}
                   </div>
                 </div>
                 <div className="mt-4 flex justify-between items-center">
-                  <div className="flex items-start">
-                    {employer.links?.map(({ id, name }) => {
-                      if (name.includes("t.me")) {
-                        return (
-                          <a
-                            key={id}
-                            href={name}
-                            className="underline text-neutral-950 text-[.9375rem] leading-6"
-                          >
-                            Telegram
-                          </a>
-                        );
-                      }
-                    })}
+                  <div className="flex gap-3 items-start">
+                    {employer.links?.map(({ id, name }) => (
+                      <a
+                        key={id}
+                        href={name}
+                        className="underline font-medium leading-6"
+                      >
+                        {getLinkType(name)}
+                      </a>
+                    ))}
                   </div>
                   <button
                     onClick={handleGoToCompanyClick}
@@ -183,9 +175,9 @@ export const Vacancy = () => {
                 <div className="text-gray-500 text-[.8125rem] leading-[1.3125rem]">
                   Локация:
                 </div>
-                <div className="text-neutral-950 text-xs leading-6">
+                <div className="leading-6">
                   {locations?.map(({ value }, index) => (
-                    <span className="text-neutral-950 text-[.9375rem] leading-6">
+                    <span className="leading-6 font-medium">
                       {index === 0 ? value : `, ${value}`}
                     </span>
                   ))}
@@ -194,26 +186,24 @@ export const Vacancy = () => {
                   Занятость / Тип договора:
                 </div>
                 <div className="flex items-center">
-                  <div className="text-neutral-950 text-[.9375rem] leading-6">
-                    {`${employment?.value} / ${schedule?.value}`}
+                  <div className="leading-6 font-medium">
+                    {`${employment?.value ?? "-"} / ${schedule?.value ?? "-"}`}
                   </div>
                 </div>
                 <div className="mt-4 text-gray-500 text-[.8125rem] leading-[1.3125rem]">
                   Опыт:
                 </div>
-                <div className="text-neutral-950 text-[.9375rem] leading-6">
-                  {experience?.value}
+                <div className="leading-6 font-medium">
+                  {experience?.value ?? "-"}
                 </div>
                 <div className="mt-4 text-gray-500 text-[.8125rem] leading-[1.3125rem]">
                   Зарплата:
                 </div>
-                <div className="text-neutral-950 text-[.9375rem] leading-6">
-                  {getSalary(salary)}
-                </div>
+                <div className="leading-6 font-medium">{getSalary(salary)}</div>
               </div>
 
               <div className="response-block mt-6 bg-white p-6 rounded-3xl">
-                <div className="text-neutral-950 text-[.9375rem] leading-6">
+                <div className="leading-6">
                   Чтобы откликнуться на вакансию, нужно зарегистрироваться.
                 </div>
                 <div className="mt-4 flex justify-center">
@@ -229,16 +219,14 @@ export const Vacancy = () => {
             <div className="flex items-center pb-2">
               {tags?.map(({ value }) => (
                 <div className="flex flex-col items-start pt-0 pb-2 pl-0 pr-2 max-w-[19.25rem]">
-                  <div className="flex flex-col items-start py-1 px-2 max-w-[18.75rem] rounded bg-neutral-200 text-neutral-950 text-sm leading-[0.875rem]">
+                  <div className="flex flex-col items-start py-1 px-2 max-w-[18.75rem] rounded bg-neutral-200 text-sm leading-[0.875rem]">
                     {value}
                   </div>
                 </div>
               ))}
             </div>
-            <div className="text-neutral-950 text-5xl leading-[48px] mb-5">
-              {name}
-            </div>
-            <div className="space-y-6 text-neutral-950 text-sm leading-6 whitespace-pre-wrap">
+            <div className="text-5xl leading-[48px] mb-5">{name}</div>
+            <div className="space-y-6 leading-6 whitespace-pre-wrap">
               {description}
             </div>
           </div>

@@ -17,6 +17,10 @@ export interface ICompanyShort {
   description: string;
 }
 
+export interface GetCompanyProps {
+  id?: string;
+}
+
 export interface ICompany {
   id: number;
   name: string;

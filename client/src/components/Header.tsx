@@ -18,13 +18,13 @@ const Header = () => {
           <div className="flex items-center">
             <Link
               to="/companies"
-              className="flex flex-col items-start text-neutral-950  text-[.9375rem] leading-6"
+              className="font-medium text-neutral-950 leading-6"
             >
               Компании
             </Link>
             <Link
               to="/vacancies"
-              className="flex flex-col items-start pl-8 text-neutral-950  leading-6"
+              className="font-medium pl-8 text-neutral-950  leading-6"
             >
               Вакансии
             </Link>
@@ -32,12 +32,13 @@ const Header = () => {
         </div>
         <div className="flex justify-center items-center gap-12">
           <div className="flex items-center">
-            <div className="flex flex-col items-start text-neutral-950  leading-6">
+            {/* пока скроем */}
+            {/* <div className="font-medium text-neutral-950 leading-6">
               Создать резюме
-            </div>
-            <div className="flex flex-col items-start pl-8 text-neutral-950  text-[.9375rem] leading-6">
+            </div> */}
+            {/* <div className="font-medium pl-8 text-neutral-950 leading-6">
               Работодателям
-            </div>
+            </div> */}
           </div>
           {!isAuthenticated ? (
             <Link
