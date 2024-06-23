@@ -1,5 +1,5 @@
-import { useVacanciesQuery } from '@/services/queries/vacancies.query';
-import { useVacanciesStore } from './store';
+import { useVacanciesQuery } from "@/services/queries/vacancies.query";
+import { useVacanciesStore } from "./store";
 
 export const useGlobalVacanciesQuery = () => {
   const { params } = useVacanciesStore();

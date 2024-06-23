@@ -12,7 +12,7 @@ function findOption(options?: IFilterValue[], value?: string) {
 }
 
 export const Filters = () => {
-  const [showOnlyStartups, setShowOnlyStartups] = useState(true);
+  const [showOnlyStartups, setShowOnlyStartups] = useState(false);
   const { data } = useFiltersQuery();
 
   const { params, setParams, resetParamsWithoutResetPage } =
@@ -20,7 +20,7 @@ export const Filters = () => {
 
   useEffect(() => {
     setParams({
-      startup: showOnlyStartups,
+      startup: showOnlyStartups ? true : undefined,
     });
   }, [showOnlyStartups]);
 
@@ -101,7 +101,7 @@ export const Filters = () => {
       </div>
       <div className="flex items-center self-stretch">
         <Switcher
-          value={showOnlyStartups}
+          value={!!showOnlyStartups}
           toggle={() => setShowOnlyStartups(!showOnlyStartups)}
         />
         <div className="flex flex-col items-start pl-3 text-neutral-950 leading-6">

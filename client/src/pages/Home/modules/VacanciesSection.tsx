@@ -35,7 +35,7 @@ export const VacanciesSection = ({ className }: { className?: string }) => {
               companyName={vacancy.name}
               description={shortString(vacancy.description ?? "", 150)}
               skills={vacancy.tags.map((tag) => tag.value)}
-              city={vacancy.locations[0].name}
+              city={vacancy.locations[0].value}
               salary={vacancy.salary}
             />
           ))}
