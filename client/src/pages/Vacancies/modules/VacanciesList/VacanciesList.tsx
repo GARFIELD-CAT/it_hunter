@@ -1,6 +1,7 @@
 import { VacancyCard } from "@/components/VacancyCard";
 import { useGlobalVacanciesQuery } from "../../useVacancies";
 import { useVacanciesStore } from "../../store";
+import { shortString } from "@/lib/helper";
 
 export const VacanciesList = ({ className }: { className?: string }) => {
   const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage } =
@@ -24,9 +25,9 @@ export const VacanciesList = ({ className }: { className?: string }) => {
             <VacancyCard
               to={`/vacancy/${vacancy.id}`}
               key={vacancy.id}
-              companyLogoSrc="https://logos-download.com/wp-content/uploads/2022/01/Maker_MKR_Logo.png"
+              companyLogoSrc={vacancy.employer.logo}
               companyName={vacancy.name}
-              description={vacancy.description}
+              description={shortString(vacancy.description ?? "", 150)}
               skills={vacancy.tags.map((tag) => tag.value)}
               city={vacancy.locations[0].name}
               salary={vacancy.salary}
