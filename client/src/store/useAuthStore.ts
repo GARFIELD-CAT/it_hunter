@@ -7,6 +7,7 @@ interface AuthState {
 
 export interface AuthStore extends AuthState {
   setIsAuthenticated: (args: AuthState["isAuthenticated"]) => void;
+  logout: () => void;
 }
 
 const initialState: Pick<AuthStore, keyof AuthState> = {
@@ -19,6 +20,10 @@ const useAuthStore = create<AuthStore>()(
       ...initialState,
       setIsAuthenticated: (isAuthenticated) => {
         set(() => ({ isAuthenticated }));
+      },
+      logout: () => {
+        localStorage.removeItem('token');
+        set(() => ({ isAuthenticated: false }));
       },
     }),
     "authStore"

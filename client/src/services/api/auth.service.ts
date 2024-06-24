@@ -1,8 +1,7 @@
 import { api } from "@/lib/api";
-import { IToken, type LoginBody } from "@/types/auth";
+import { IToken, type ILoginBody } from "@/types/auth";
 
-// Dummy login request that will resolve in 2 seconds
-export const login = async (body: LoginBody) => {
+export const login = async (body: ILoginBody) => {
   const { data } = await api.post<IToken>("auth/token/login/", body);
   return data;
 };

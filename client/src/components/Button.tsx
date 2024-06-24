@@ -20,7 +20,6 @@ const Button: React.FC<ButtonProps> = ({
   children,
   ...props
 }) => {
-  console.log("🚀 ~ className:", className);
   return (
     <button
       type="button"

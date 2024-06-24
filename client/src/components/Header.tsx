@@ -4,10 +4,10 @@ import Logo from "@/assets/svg/logo.svg";
 import { Link } from "react-router-dom";
 
 const Header = () => {
-  const { isAuthenticated, setIsAuthenticated } = useAuthStore(
-    (state) => state
-  );
+  const { isAuthenticated, logout } = useAuthStore((state) => state);
   console.log("🚀 ~ Header ~ isAuthenticated:", isAuthenticated);
+
+  console.log(localStorage.getItem("token"));
 
   return (
     <nav>
@@ -57,7 +57,7 @@ const Header = () => {
                 />
               </Link>
               <button
-                onClick={() => setIsAuthenticated(false)}
+                onClick={logout}
                 className="flex justify-center items-center self-stretch py-2 px-4 w-[5.0625rem] rounded-md bg-black text-white cursor-pointer leading-6 hover:opacity-50 transition-opacity"
               >
                 Выйти

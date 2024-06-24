@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "@/lib/validation";
 import { useLoginQuery } from "@/services/queries/auth.query";
 import useAuthStore from "@/store/useAuthStore";
-import { type LoginBody } from "@/types/auth";
+import { type ILoginBody } from "@/types/auth";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import { useNavigate } from "react-router";
@@ -19,7 +19,7 @@ export const SignInForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginBody>({ resolver: yupResolver(loginSchema) });
+  } = useForm<ILoginBody>({ resolver: yupResolver(loginSchema) });
 
   useEffect(() => {
     if (isError) {
@@ -27,9 +27,10 @@ export const SignInForm = () => {
     }
   }, [isError]);
 
-  const onSubmit: SubmitHandler<LoginBody> = async (data) => {
+  const onSubmit: SubmitHandler<ILoginBody> = async (data) => {
     try {
-      await login(data);
+      const token = await login(data);
+      localStorage.setItem("token", token.auth_token);
       setIsAuthenticated(true);
       navigate("/");
     } catch (error) {

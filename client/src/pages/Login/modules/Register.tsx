@@ -2,36 +2,60 @@ import { useEffect } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { loginSchema } from "@/lib/validation";
-import { useLoginQuery } from "@/services/queries/auth.query";
+import { registrationSchema } from "@/lib/validation";
 import useAuthStore from "@/store/useAuthStore";
-import { type LoginBody } from "@/types/auth";
+import type {
+  IRegistrationBodyValidation,
+  IValidationErrors,
+} from "@/types/auth";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import { useNavigate } from "react-router";
+import { useRegistrationQuery } from "@/services/queries/registration.query";
+import { AxiosError } from "axios";
+import { login } from "@/services/api/auth.service";
 
 export const RegisterForm = () => {
   const navigate = useNavigate();
 
   const { setIsAuthenticated } = useAuthStore((state) => state);
-  const { isLoading, mutateAsync: login, isError, error } = useLoginQuery();
+  const { mutateAsync: registration, isError, error } = useRegistrationQuery();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginBody>({ resolver: yupResolver(loginSchema) });
+    setError,
+  } = useForm<IRegistrationBodyValidation>({
+    resolver: yupResolver(registrationSchema),
+  });
 
   useEffect(() => {
-    if (isError) {
-      toast.error(error as string, { theme: "colored" });
+    if (isError && (error as AxiosError<IValidationErrors>)?.response?.data) {
+      const serverErrors = error.response?.data;
+      for (const field in serverErrors) {
+        if (serverErrors.hasOwnProperty(field)) {
+          const messages = serverErrors[field as keyof IValidationErrors];
+          setError(field as keyof IValidationErrors, {
+            type: "server",
+            message: messages?.join(", "),
+          });
+        }
+      }
+    } else if (isError) {
+      toast.error(error as unknown as string, { theme: "colored" });
     }
   }, [isError]);
 
-  const onSubmit: SubmitHandler<LoginBody> = async (data) => {
+  const onSubmit: SubmitHandler<IRegistrationBodyValidation> = async (data) => {
+    const { email, first_name, phone, password } = data;
     try {
-      await login(data);
-      setIsAuthenticated(true);
-      navigate("/");
+      const result = await registration({ email, first_name, phone, password });
+      if (!!result.id) {
+        const token = await login({ email, password });
+        localStorage.setItem("token", token.auth_token);
+        setIsAuthenticated(true);
+        navigate("/");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -56,16 +80,16 @@ export const RegisterForm = () => {
         <Input
           errors={errors}
           placeholder="Имя"
-          id="name"
+          id="first_name"
           register={register}
-          name="name"
+          name="first_name"
         />
         <Input
           errors={errors}
-          placeholder="Фамилия"
-          id="surname"
+          placeholder="Телефон"
+          id="phone"
           register={register}
-          name="surname"
+          name="phone"
         />
         <Input
           errors={errors}
@@ -79,16 +103,14 @@ export const RegisterForm = () => {
           placeholder="Повторите пароль"
           type="password"
           register={register}
-          name="password"
+          name="password2"
         />
       </div>
-      {/* <button
-        className="flex flex-shrink-0 justify-center items-center pl-[7.5625rem] pr-[7.5625rem] p-0 w-[439px] h-8 rounded-md bg-black text-white text-center suisse font-medium leading-6"
+      <Button
+        text="Зарегистрироваться"
         type="submit"
-      >
-        Войти
-      </button> */}
-      <Button text="Войти" type="submit" className="w-full mt-10" />
+        className="w-full mt-10"
+      />
     </form>
   );
 };
