@@ -6,7 +6,7 @@ import { registrationSchema } from "@/lib/validation";
 import useAuthStore from "@/store/useAuthStore";
 import type {
   IRegistrationBodyValidation,
-  IValidationErrors,
+  IRegistrationValidationErrors,
 } from "@/types/auth";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
@@ -30,12 +30,13 @@ export const RegisterForm = () => {
   });
 
   useEffect(() => {
-    if (isError && (error as AxiosError<IValidationErrors>)?.response?.data) {
+    if (isError && error?.response?.data) {
       const serverErrors = error.response?.data;
       for (const field in serverErrors) {
         if (serverErrors.hasOwnProperty(field)) {
-          const messages = serverErrors[field as keyof IValidationErrors];
-          setError(field as keyof IValidationErrors, {
+          const messages =
+            serverErrors[field as keyof IRegistrationValidationErrors];
+          setError(field as keyof IRegistrationValidationErrors, {
             type: "server",
             message: messages?.join(", "),
           });

@@ -1,9 +1,13 @@
 import { useMutation } from "@tanstack/react-query";
-import { type ILoginBody } from "@/types/auth";
+import type { ILoginValidationErrors, IToken, ILoginBody } from "@/types/auth";
 import { login } from "../api/auth.service";
+import { AxiosError } from "axios";
 
 export const useLoginQuery = () =>
-  useMutation(["login"], async (body: ILoginBody) => {
-    const res = await login(body);
-    return res;
-  });
+  useMutation<IToken, AxiosError<ILoginValidationErrors>, ILoginBody>(
+    ["login"],
+    async (body) => {
+      const res = await login(body);
+      return res;
+    }
+  );

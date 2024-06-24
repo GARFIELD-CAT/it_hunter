@@ -11,7 +11,7 @@ export interface AuthStore extends AuthState {
 }
 
 const initialState: Pick<AuthStore, keyof AuthState> = {
-  isAuthenticated: false,
+  isAuthenticated: localStorage.getItem("token") ? true : false,
 };
 
 const useAuthStore = create<AuthStore>()(

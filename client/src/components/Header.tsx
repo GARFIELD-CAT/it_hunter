@@ -7,8 +7,6 @@ const Header = () => {
   const { isAuthenticated, logout } = useAuthStore((state) => state);
   console.log("🚀 ~ Header ~ isAuthenticated:", isAuthenticated);
 
-  console.log(localStorage.getItem("token"));
-
   return (
     <nav>
       <div className="flex justify-between items-center self-stretch py-4 px-12">

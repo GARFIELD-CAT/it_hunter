@@ -17,13 +17,22 @@ export const SignInForm = () => {
   const { isLoading, mutateAsync: login, isError, error } = useLoginQuery();
   const {
     register,
+    setError,
     handleSubmit,
     formState: { errors },
   } = useForm<ILoginBody>({ resolver: yupResolver(loginSchema) });
 
+  console.log({ isError, error });
+
   useEffect(() => {
-    if (isError) {
-      toast.error(error as string, { theme: "colored" });
+    if (isError && error?.response?.data) {
+      const serverError = error.response?.data?.non_field_errors;
+      setError("password", {
+        type: "server",
+        message: serverError?.join(", "),
+      });
+    } else if (isError) {
+      toast.error(error as unknown as string, { theme: "colored" });
     }
   }, [isError]);
 

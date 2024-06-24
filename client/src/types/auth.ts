@@ -7,6 +7,10 @@ export interface IToken {
   auth_token: string;
 }
 
+export type ILoginValidationErrors = {
+  non_field_errors: string[];
+}
+
 export interface IRegistrationBody {
   email: string;
   first_name: string;
@@ -18,7 +22,7 @@ export interface IRegistrationBodyValidation extends IRegistrationBody {
   password2: string;
 }
 
-export type IValidationErrors = {
+export type IRegistrationValidationErrors = {
   [key in keyof IRegistrationBody]?: string[];
 }
 
