@@ -14,15 +14,13 @@ export const SignInForm = () => {
   const navigate = useNavigate();
 
   const { setIsAuthenticated } = useAuthStore((state) => state);
-  const { isLoading, mutateAsync: login, isError, error } = useLoginQuery();
+  const { mutateAsync: login, isError, error } = useLoginQuery();
   const {
     register,
     setError,
     handleSubmit,
     formState: { errors },
   } = useForm<ILoginBody>({ resolver: yupResolver(loginSchema) });
-
-  console.log({ isError, error });
 
   useEffect(() => {
     if (isError && error?.response?.data) {

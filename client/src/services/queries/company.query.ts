@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { GetCompanyProps, ICompany } from "@/types/company";
-import { getCompany } from "../api/company.service";
+import { GetCompanyProps, ICompany, ISector } from "@/types/company";
+import { getCompany, getCompanyEmployees, getCompanyLocations, getCompanySectors } from "../api/company.service";
 
 export const useCompanyQuery = (params: GetCompanyProps) =>
   useQuery<ICompany>(
@@ -11,3 +11,30 @@ export const useCompanyQuery = (params: GetCompanyProps) =>
     },
 );
  
+
+export const useCompanySectorsQuery = () =>
+  useQuery<ISector[]>(
+    ["getCompanySector"],
+    async () => {
+      const res = await getCompanySectors();
+      return res;
+    },
+);
+
+export const useCompanyLocationsQuery = () =>
+  useQuery<ISector[]>(
+    ["getCompanyLocations"],
+    async () => {
+      const res = await getCompanyLocations();
+      return res;
+    },
+);
+
+export const useCompanyEmployeesQuery = () =>
+  useQuery<ISector[]>(
+    ["getCompanyEmployees"],
+    async () => {
+      const res = await getCompanyEmployees();
+      return res;
+    },
+);

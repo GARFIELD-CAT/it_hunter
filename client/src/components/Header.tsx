@@ -1,11 +1,17 @@
 import useAuthStore from "@/store/useAuthStore";
 
 import Logo from "@/assets/svg/logo.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const { isAuthenticated, logout } = useAuthStore((state) => state);
+  const navigate = useNavigate();
   console.log("🚀 ~ Header ~ isAuthenticated:", isAuthenticated);
+
+  const handleLogOutClick = () => {
+    logout();
+    navigate("/");
+  };
 
   return (
     <nav>
@@ -35,9 +41,14 @@ const Header = () => {
             {/* <div className="font-medium text-neutral-950 leading-6">
               Создать резюме
             </div> */}
-            {/* <div className="font-medium pl-8 text-neutral-950 leading-6">
-              Работодателям
-            </div> */}
+            {isAuthenticated && (
+              <Link
+                to="/company/new"
+                className="font-medium pl-8 text-neutral-950  leading-6"
+              >
+                Создать компанию
+              </Link>
+            )}
           </div>
           {!isAuthenticated ? (
             <Link
@@ -55,7 +66,7 @@ const Header = () => {
                 />
               </Link>
               <button
-                onClick={logout}
+                onClick={handleLogOutClick}
                 className="flex justify-center items-center self-stretch py-2 px-4 w-[5.0625rem] rounded-md bg-black text-white cursor-pointer leading-6 hover:opacity-50 transition-opacity"
               >
                 Выйти

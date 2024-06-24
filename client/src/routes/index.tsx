@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import { Vacancy } from "@/pages/Vacancy/Vacancy";
 import { Company } from "@/pages/Company/Company";
 import Login from "@/pages/Login";
+import { CreateCompany } from "@/pages/CreateCompany/CreateCompany";
 
 const Router = () => (
   <BrowserRouter>
@@ -17,6 +18,7 @@ const Router = () => (
         <Route path="vacancy/:id" element={<Vacancy />} />
         <Route path="/companies" element={<Companies />} />
         <Route path="/company/:id" element={<Company />} />
+        <Route path="/company/new" element={<CreateCompany />} />
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<div>404</div>} />
       </Routes>
