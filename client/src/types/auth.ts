@@ -1,4 +1,8 @@
 export interface LoginBody {
-  username: string;
+  email: string;
   password: string;
+}
+
+export interface IToken {
+  auth_token: string;
 }

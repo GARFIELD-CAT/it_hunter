@@ -7,6 +7,7 @@ const Header = () => {
   const { isAuthenticated, setIsAuthenticated } = useAuthStore(
     (state) => state
   );
+  console.log("🚀 ~ Header ~ isAuthenticated:", isAuthenticated);
 
   return (
     <nav>
