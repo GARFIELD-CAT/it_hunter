@@ -1,7 +1,6 @@
 import { CompanyCard } from "@/components/CompanyCard";
 import { shortString } from "@/lib/helper";
 import { useCompaniesQuery } from "@/services/queries/companies.query";
-import { ICompanyShort } from "@/types/company";
 import { Link } from "react-router-dom";
 
 export const CompanySection = ({ className }: { className?: string }) => {
@@ -9,7 +8,10 @@ export const CompanySection = ({ className }: { className?: string }) => {
     search: "",
   });
 
-  const formattedCompaniesData = data?.pages.map((page) => page.results).flat();
+  const formattedCompaniesData = data?.pages
+    .map((page) => page.results)
+    .flat()
+    .slice(0, 4);
 
   return (
     <div className={className}>
