@@ -27,11 +27,6 @@ const Header = () => {
   const navigate = useNavigate();
   console.log("🚀 ~ Header ~ isAuthenticated:", isAuthenticated);
 
-  const handleLogOutClick = () => {
-    logout();
-    navigate("/");
-  };
-
   return (
     <nav>
       <div className="flex justify-between items-center self-stretch py-4 px-12">
@@ -56,19 +51,14 @@ const Header = () => {
         </div>
         <div className="flex justify-center items-center gap-12">
           <div className="flex items-center">
-            {/* пока скроем */}
-            {/* <div className="font-medium text-neutral-950 leading-6">
-              Создать резюме
-            </div> */}
-            {/* <div className="font-medium pl-8 text-neutral-950 leading-6">
-              Работодателям
-            </div> */}
-            <Link
-              to="/create-vacancy"
-              className="font-medium text-neutral-950 leading-6 cursor-pointer"
-            >
-              Создать вакансию
-            </Link>
+            {isAuthenticated && (
+              <Link
+                to="/create-vacancy"
+                className="font-medium text-neutral-950 leading-6 cursor-pointer"
+              >
+                Создать вакансию
+              </Link>
+            )}
           </div>
           {!isAuthenticated ? (
             <Link
@@ -80,12 +70,6 @@ const Header = () => {
           ) : (
             <div className="flex items-center gap-4">
               <AccountBtn />
-              {/* <button
-                onClick={logout}
-                className="flex justify-center items-center self-stretch py-2 px-4 w-[5.0625rem] rounded-md bg-black text-white cursor-pointer leading-6 hover:opacity-50 transition-opacity"
-              >
-                Выйти
-              </button> */}
             </div>
           )}
         </div>
