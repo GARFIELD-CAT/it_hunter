@@ -51,3 +51,46 @@ export const createCompanySchema = yup.object().shape({
     .required("Выберите количество сотрудников"),
   description: yup.string().required("Описание обязательно"),
 });
+
+export const createVacancySchema = yup.object({
+  name: yup.string().required("Название вакансии обязательно"),
+  description: yup.string().required("Описание обязательно"),
+  location: yup
+    .object()
+    .shape({
+      id: yup.number().required(),
+      name: yup.string().required(),
+      value: yup.string().required(),
+    })
+    .required("Выберите локацию"),
+  employmentType: yup
+    .object({
+      id: yup.number().required(),
+      name: yup.string().required(),
+      value: yup.string().required(),
+    })
+    .required("Выберите тип занятости"),
+  experience: yup
+    .object({
+      id: yup.number().required(),
+      name: yup.string().required(),
+      value: yup.string().required(),
+    })
+    .required("Выберите опыт работы"),
+  tag: yup
+    .object({
+      id: yup.number().required(),
+      name: yup.string().required(),
+      value: yup.string().required(),
+    })
+    .required("Выберите тег"),
+  schedule: yup
+    .object({
+      id: yup.number().required(),
+      name: yup.string().required(),
+      value: yup.string().required(),
+    })
+    .required("Выберите график работы"),
+  salary_from: yup.string().required("Укажите зарплату от"),
+  salary_to: yup.string().required("Укажите зарплату до"),
+});

@@ -1,3 +1,5 @@
+import { ISector } from "./company";
+
 export interface GetVacanciesResponse {
   count: number;
   next: string;
@@ -66,4 +68,33 @@ interface ICommonType {
   id: number;
   name: string;
   value: string;
+}
+
+export interface ICreateVacancyValidationBody {
+  name: string;
+  description: string;
+  employmentType: ISector;
+  location: ISector;
+  experience: ISector;
+  tag: ISector;
+  schedule: ISector;
+  salary_from: string;
+  salary_to: string;
+}
+
+export interface ICreateVacancyBody {
+  name: string;
+  locations: number[];
+  salary: {
+    _from: number;
+    to: number;
+    currency: string;
+  };
+  type: number;
+  schedule: number;
+  employment: number;
+  experience: number;
+  description: string;
+  snippet: string;
+  tags: number[];
 }
