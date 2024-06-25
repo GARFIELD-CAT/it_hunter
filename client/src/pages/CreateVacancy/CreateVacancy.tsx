@@ -253,7 +253,7 @@ export const CreateVacancy = () => {
             </div>
             <Input
               errors={errors}
-              placeholder="Название компании"
+              placeholder="Название вакансии"
               id="name"
               register={register}
               name="name"
@@ -263,7 +263,7 @@ export const CreateVacancy = () => {
               <textarea
                 {...register("description")}
                 className="w-full h-52 border-0 focus:outline-none text-lg"
-                placeholder="Описание компании"
+                placeholder="Описание вакансии"
               />
               {errors.description && (
                 <div className="text-red-500 text-sm">
