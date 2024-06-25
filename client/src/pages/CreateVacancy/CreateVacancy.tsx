@@ -21,7 +21,9 @@ export const CreateVacancy = () => {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuthStore();
 
-  const [location, setLocation] = useState<IFilterValue>([]);
+  const [location, setLocation] = useState<IFilterValue>();
+  const [experience, setExperience] = useState<IFilterValue>();
+  const [employmentType, setEmploymentType] = useState<IFilterValue>();
 
   const { data: vacancyOptions } = useFiltersQuery();
 
@@ -221,45 +223,56 @@ export const CreateVacancy = () => {
               </div>
 
               <div className="vacancy-conditions-block mt-6  bg-white p-8 rounded-3xl">
-                <div className="flex flex-col items-start gap-1 self-stretch">
-                  <div className="flex flex-col items-start text-[#808080] text-sm leading-[1.3125rem]">
-                    Локация:
+                <div className="flex flex-col gap-4">
+                  <div className="flex flex-col items-start gap-1 self-stretch">
+                    <div className="flex flex-col items-start text-gray-500 text-[.8125rem] leading-[1.3125rem]">
+                      Локация:
+                    </div>
+                    <Select
+                      value={location}
+                      placeholder="Выбрать"
+                      options={vacancyOptions?.locations ?? []}
+                      onChange={(value) => setLocation(value as IFilterValue)}
+                    />
                   </div>
-                  <Select
-                    value={location}
-                    placeholder="Выберите локацию"
-                    options={vacancyOptions?.locations ?? []}
-                    onChange={(value) => setLocation(value as IFilterValue)}
-                  />
-                </div>
-                <div className="mt-4 text-gray-500 text-[.8125rem] leading-[1.3125rem]">
-                  Занятость / Тип договора:
-                </div>
-                <div className="flex items-center">
-                  <div className="leading-6 font-medium">
-                    {/* {`${employment?.value ?? "-"} / ${schedule?.value ?? "-"}`} */}
+                  <div className="flex flex-col items-start gap-1 self-stretch">
+                    <div className="text-gray-500 text-[.8125rem] leading-[1.3125rem]">
+                      Занятость / Тип договора:
+                    </div>
+                    <Select
+                      value={employmentType}
+                      placeholder="Выбрать"
+                      options={vacancyOptions?.employmentTypes ?? []}
+                      onChange={(value) =>
+                        setEmploymentType(value as IFilterValue)
+                      }
+                    />
                   </div>
-                </div>
-                <div className="mt-4 text-gray-500 text-[.8125rem] leading-[1.3125rem]">
-                  Опыт:
-                </div>
-                <div className="leading-6 font-medium">
-                  {/* {experience?.value ?? "-"} */}
-                </div>
-                <div className="mt-4 text-gray-500 text-[.8125rem] leading-[1.3125rem]">
-                  Зарплата:
-                </div>
-                {/* <div className="leading-6 font-medium">{getSalary(salary)}</div> */}
-              </div>
-
-              <div className="response-block mt-6 bg-white p-6 rounded-3xl">
-                <div className="leading-6">
-                  Чтобы откликнуться на вакансию, нужно зарегистрироваться.
-                </div>
-                <div className="mt-4 flex justify-center">
-                  <button className="bg-black text-white text-[1.0625rem] leading-6 py-3 px-20 rounded-md">
-                    Зарегистрироваться
-                  </button>
+                  <div className="flex flex-col items-start gap-1 self-stretch">
+                    <div className="flex flex-col items-start text-gray-500 text-[.8125rem] leading-[1.3125rem]">
+                      Опыт:
+                    </div>
+                    <Select
+                      value={experience}
+                      placeholder="Выбрать"
+                      options={vacancyOptions?.experiences ?? []}
+                      onChange={(value) => setExperience(value as IFilterValue)}
+                    />
+                  </div>
+                  <div className="flex flex-col items-start gap-1 self-stretch">
+                    <div className="text-gray-500 text-[.8125rem] leading-[1.3125rem]">
+                      Зарплата:
+                    </div>
+                    <Input
+                      errors={errors}
+                      placeholder="40 000 RUB"
+                      id="salary"
+                      register={register}
+                      name="salary"
+                      className="border-0 focus:outline-none text-lg"
+                    />
+                  </div>
+                  {/* <div className="leading-6 font-medium">{getSalary(salary)}</div> */}
                 </div>
               </div>
             </div>
