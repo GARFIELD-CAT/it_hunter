@@ -184,7 +184,7 @@ export const CreateVacancy = () => {
                     ))}
                   </div>
                   <button
-                    onClick={() => navigate("/company/new")}
+                    onClick={() => navigate("/my-company")}
                     className="p-1 w-8 h-8 bg-neutral-200 rounded-lg flex justify-center items-center"
                   >
                     <svg

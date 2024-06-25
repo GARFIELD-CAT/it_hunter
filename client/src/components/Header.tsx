@@ -145,7 +145,7 @@ const AccountBtn = () => {
               Мои Вакансии
             </button>
             <Link
-              to="/company/new"
+              to="/my-company"
               className="py-1 w-full hover:bg-gray-100  text-left px-8 flex items-center gap-2"
             >
               <img src={Document} className="w-4 h-4" />
