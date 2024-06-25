@@ -24,7 +24,16 @@ const Router = () => (
         <Route path="/company/:id" element={<Company />} />
         <Route path="/company/new" element={<MyCompany />} />
         <Route path="/login" element={<Login />} />
-        <Route path="*" element={<div>404</div>} />
+        <Route
+          path="*"
+          element={
+            <div className="font-bold text-center m-auto flex flex-col">
+              <b className="text-[14rem] leading-none">404</b>
+              <span className="text-4xl ">СТРАНИЦА НЕ НАЙДЕНА</span>
+              <span className="text-sm mt-4">или еще не создана</span>
+            </div>
+          }
+        />
       </Routes>
     </div>
   </BrowserRouter>
