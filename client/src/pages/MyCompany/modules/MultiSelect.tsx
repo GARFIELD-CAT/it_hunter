@@ -49,25 +49,34 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
   };
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="inline-flex flex-col gap-2">
       <div className="flex items-center gap-2">
         <span>{placeholder}:</span>
         {fields.map((item, index) => (
-          <span key={item.id} className="font-medium">
+          <div
+            key={item.id}
+            className="font-medium bg-slate-100 px-2 rounded-md"
+          >
             {/* типизацию field не смог победить */}
             {options.find((el) => el.name === item.name)?.value}
-            <button type="button" onClick={() => remove(index)}>
+            <button
+              className="ml-1"
+              type="button"
+              onClick={() => remove(index)}
+            >
               ✕
             </button>
-          </span>
+          </div>
         ))}
-        <button
-          type="button"
-          onClick={() => setIsDropdownVisible(!isDropdownVisible)}
-          className="text-gray-500"
-        >
-          Добавить +
-        </button>
+        {!isDropdownVisible && (
+          <button
+            type="button"
+            onClick={() => setIsDropdownVisible(!isDropdownVisible)}
+            className="text-gray-500"
+          >
+            Добавить +
+          </button>
+        )}
       </div>
       {isDropdownVisible && (
         <select

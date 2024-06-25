@@ -11,7 +11,7 @@ import { Footer } from "@/components/Footer";
 const Home = () => {
   return (
     <>
-      <Container className="mt-[8.12rem] flex flex-col gap-[5.5rem]">
+      <Container className="mt-[8.12rem] flex flex-col gap-[5.5rem] w-full">
         <HeroSection />
         <CompanySection />
         <AddCompanyForm />
