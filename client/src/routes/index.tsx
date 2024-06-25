@@ -7,6 +7,7 @@ import { Vacancy } from "@/pages/Vacancy/Vacancy";
 import { Company } from "@/pages/Company/Company";
 import Login from "@/pages/Login";
 import { CreateCompany } from "@/pages/CreateCompany/CreateCompany";
+import { CreateVacancy } from "@/pages/CreateVacancy/CreateVacancy";
 
 const Router = () => (
   <BrowserRouter>
@@ -15,7 +16,10 @@ const Router = () => (
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/vacancies" element={<Vacancies />} />
-        <Route path="vacancy/:id" element={<Vacancy />} />
+        <Route path="vacancy/:id" element={<Vacancy />}>
+          {/* <Route path="/edit" element={<CreateVacancy />} /> */}
+        </Route>
+        {/* <Route path="/create-vacancy" element={<CreateVacancy />} /> */}
         <Route path="/companies" element={<Companies />} />
         <Route path="/company/:id" element={<Company />} />
         <Route path="/company/new" element={<CreateCompany />} />
