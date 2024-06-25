@@ -63,10 +63,6 @@ export const Vacancy = () => {
     setIsModalOpen(false);
   };
 
-  const handleGoToLogin = () => {
-    navigate("/login");
-  };
-
   return (
     <>
       <ResponseModal isOpen={isModalOpen} onClose={handleModalClose} />
@@ -227,31 +223,14 @@ export const Vacancy = () => {
                 </div>
 
                 <div className="response-block mt-6 bg-white p-6 rounded-3xl">
-                  {isAuthenticated ? (
-                    <div className="flex justify-center">
-                      <button
-                        onClick={handleModalOpen}
-                        className="bg-black text-white text-[1.0625rem] leading-6 py-3 px-20 rounded-md"
-                      >
-                        Откликнуться
-                      </button>
-                    </div>
-                  ) : (
-                    <>
-                      <div className="leading-6 mb-4">
-                        Чтобы откликнуться на вакансию, нужно
-                        зарегистрироваться.
-                      </div>
-                      <div className="flex justify-center">
-                        <button
-                          onClick={handleGoToLogin}
-                          className="bg-black text-white text-[1.0625rem] leading-6 py-3 px-20 rounded-md"
-                        >
-                          Зарегистрироваться
-                        </button>
-                      </div>
-                    </>
-                  )}
+                  <div className="flex justify-center">
+                    <button
+                      onClick={handleModalOpen}
+                      className="bg-black text-white text-[1.0625rem] leading-6 py-3 px-20 rounded-md"
+                    >
+                      Откликнуться
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
