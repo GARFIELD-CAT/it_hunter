@@ -19,7 +19,7 @@ const Router = () => (
         <Route path="vacancy/:id" element={<Vacancy />}>
           {/* <Route path="/edit" element={<CreateVacancy />} /> */}
         </Route>
-        {/* <Route path="/create-vacancy" element={<CreateVacancy />} /> */}
+        <Route path="/create-vacancy" element={<CreateVacancy />} />
         <Route path="/companies" element={<Companies />} />
         <Route path="/company/:id" element={<Company />} />
         <Route path="/company/new" element={<MyCompany />} />

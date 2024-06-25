@@ -3,9 +3,103 @@ import { Footer } from "@/components/Footer";
 import { useVacancyQuery } from "@/services/queries/vacancy.query";
 import { useNavigate, useParams } from "react-router";
 import { formatDate, getLinkType, getSalary } from "@/lib/helper";
+import { useCompanyByTokenQuery } from "@/services/queries/company.query";
+import Input from "@/components/Input";
+import { createCompanySchema } from "@/lib/validation";
+import { useCreateCompanyQuery } from "@/services/queries/createCompany.query";
+import { ICreateCompanyValidationBody } from "@/types/company";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect, useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { toast } from "react-toastify";
+import useAuthStore from "@/store/useAuthStore";
+import { useFiltersQuery } from "@/services/queries/filters.query";
+import { Select } from "@/components/Select";
+import { IFilterValue } from "@/types/filters";
 
 export const CreateVacancy = () => {
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuthStore();
+
+  const [location, setLocation] = useState<IFilterValue>([]);
+
+  const { data: vacancyOptions } = useFiltersQuery();
+
+  const { data: companyData } = useCompanyByTokenQuery();
+  console.log("🚀 ~ CreateVacancy ~ companyData:", companyData);
+
+  const {
+    mutateAsync: createCompany,
+    isError,
+    error,
+  } = useCreateCompanyQuery();
+
+  const {
+    control,
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm<ICreateCompanyValidationBody>({
+    resolver: yupResolver(createCompanySchema),
+  });
+
+  useEffect(() => {
+    if (isError && error?.response?.data) {
+      const nameError = error.response?.data?.name;
+      const alreadyExistError = error.response?.data["errors:"];
+      if (nameError) {
+        setError("name", {
+          type: "server",
+          message: nameError?.join(", "),
+        });
+      }
+      if (alreadyExistError) {
+        setError("description", {
+          type: "server",
+          message: alreadyExistError,
+        });
+      }
+    }
+  }, [isError]);
+
+  useEffect(() => {
+    if (!isAuthenticated) navigate("/");
+  }, [isAuthenticated]);
+
+  const onSubmit: SubmitHandler<ICreateCompanyValidationBody> = async (
+    data
+  ) => {
+    try {
+      const {
+        name,
+        description,
+        snippet,
+        locations,
+        sector,
+        employees_number,
+      } = data;
+
+      const requestData = {
+        name,
+        description,
+        snippet,
+        locations: locations.map((el) => +el.id),
+        sector: sector.map((el) => +el.id),
+        employees_number: +employees_number[0]?.id,
+      };
+
+      const response = await createCompany(requestData);
+
+      if (response.id) {
+        navigate(`/companies/`);
+      }
+    } catch (error) {
+      toast.error(error as string, {
+        theme: "colored",
+      });
+    }
+  };
 
   return (
     <div className="flex flex-1 flex-col justify-between items-start">
@@ -28,7 +122,7 @@ export const CreateVacancy = () => {
           <div className="w-px h-10 bg-gray-300" />
           <div className="flex flex-col items-start pl-6">
             <div className="bg-neutral-200 text-sm leading-[14px] py-1 px-2 rounded">
-              Вакансия
+              Создание вакансии
             </div>
           </div>
           {/* <div className="flex flex-col items-start pl-6 text-gray-500 text-sm leading-[1.3125rem]">
@@ -41,21 +135,22 @@ export const CreateVacancy = () => {
             <div className="company-information-block flex flex-col min-w-96 w-full">
               <div className="bg-white p-6 rounded-3xl">
                 <div className="flex items-center">
-                  <div className="w-14 h-14 bg-cover rounded-full">
-                    <img src={employer.logo}></img>
-                  </div>
-
+                  <img
+                    className="w-14 h-14 bg-cover rounded-full"
+                    src={companyData?.logo}
+                  />
                   <div className="pl-4 font-medium text-xl">
-                    {employer.name}
+                    {/* {employer.name} */}
+                    {companyData?.name}
                   </div>
                 </div>
                 <div className="h-18">
-                  <div className="leading-6">{employer.snippet}</div>
+                  {/* <div className="leading-6">{employer.snippet}</div> */}
                 </div>
                 <div className="mt-4">
                   <div className="flex items-start">
                     <div className="leading-6">Секторы:</div>
-                    {employer.sector.map(({ id, value }) => (
+                    {companyData?.sector?.map(({ id, value }) => (
                       <div key={id} className="pl-3 font-medium leading-6">
                         {value}
                       </div>
@@ -64,12 +159,12 @@ export const CreateVacancy = () => {
                   <div className="flex items-start mt-2">
                     <div className="leading-6">Сотрудники:</div>
                     <div className="pl-3 text-center font-medium leading-6">
-                      {employer.employees_number.value}
+                      {companyData?.employees_number?.value}
                     </div>
                   </div>
                   <div className="flex items-start mt-2">
                     <div className="leading-6">Локации:</div>
-                    {employer.locations?.map(({ id, value }) => (
+                    {companyData?.locations?.map(({ id, value }) => (
                       <div key={id} className="pl-3 font-medium leading-6">
                         {value}
                       </div>
@@ -78,7 +173,7 @@ export const CreateVacancy = () => {
                 </div>
                 <div className="mt-4 flex justify-between items-center">
                   <div className="flex gap-3 items-start">
-                    {employer.links?.map(({ id, name }) => (
+                    {companyData?.links?.map(({ id, name }) => (
                       <a
                         key={id}
                         href={name}
@@ -89,7 +184,7 @@ export const CreateVacancy = () => {
                     ))}
                   </div>
                   <button
-                    onClick={handleGoToCompanyClick}
+                    onClick={() => navigate("/company/new")}
                     className="p-1 w-8 h-8 bg-neutral-200 rounded-lg flex justify-center items-center"
                   >
                     <svg
@@ -126,34 +221,35 @@ export const CreateVacancy = () => {
               </div>
 
               <div className="vacancy-conditions-block mt-6  bg-white p-8 rounded-3xl">
-                <div className="text-gray-500 text-[.8125rem] leading-[1.3125rem]">
-                  Локация:
-                </div>
-                <div className="leading-6">
-                  {locations?.map(({ value }, index) => (
-                    <span className="leading-6 font-medium">
-                      {index === 0 ? value : `, ${value}`}
-                    </span>
-                  ))}
+                <div className="flex flex-col items-start gap-1 self-stretch">
+                  <div className="flex flex-col items-start text-[#808080] text-sm leading-[1.3125rem]">
+                    Локация:
+                  </div>
+                  <Select
+                    value={location}
+                    placeholder="Выберите локацию"
+                    options={vacancyOptions?.locations ?? []}
+                    onChange={(value) => setLocation(value as IFilterValue)}
+                  />
                 </div>
                 <div className="mt-4 text-gray-500 text-[.8125rem] leading-[1.3125rem]">
                   Занятость / Тип договора:
                 </div>
                 <div className="flex items-center">
                   <div className="leading-6 font-medium">
-                    {`${employment?.value ?? "-"} / ${schedule?.value ?? "-"}`}
+                    {/* {`${employment?.value ?? "-"} / ${schedule?.value ?? "-"}`} */}
                   </div>
                 </div>
                 <div className="mt-4 text-gray-500 text-[.8125rem] leading-[1.3125rem]">
                   Опыт:
                 </div>
                 <div className="leading-6 font-medium">
-                  {experience?.value ?? "-"}
+                  {/* {experience?.value ?? "-"} */}
                 </div>
                 <div className="mt-4 text-gray-500 text-[.8125rem] leading-[1.3125rem]">
                   Зарплата:
                 </div>
-                <div className="leading-6 font-medium">{getSalary(salary)}</div>
+                {/* <div className="leading-6 font-medium">{getSalary(salary)}</div> */}
               </div>
 
               <div className="response-block mt-6 bg-white p-6 rounded-3xl">
@@ -171,17 +267,28 @@ export const CreateVacancy = () => {
 
           <div className="vacancy-description-block flex flex-col justify-center shrink lg:basis-8/12 min-w-96 w-full bg-white rounded-3xl p-6">
             <div className="flex items-center pb-2">
-              {tags?.map(({ value }) => (
+              {/* {tags?.map(({ value }) => (
                 <div className="flex flex-col items-start pt-0 pb-2 pl-0 pr-2 max-w-[19.25rem]">
                   <div className="flex flex-col items-start py-1 px-2 max-w-[18.75rem] rounded bg-neutral-200 text-sm leading-[0.875rem]">
                     {value}
                   </div>
                 </div>
-              ))}
+              ))} */}
             </div>
-            <div className="text-5xl leading-[48px] mb-5">{name}</div>
+            <Input
+              errors={errors}
+              placeholder="Название компании"
+              id="name"
+              register={register}
+              name="name"
+              className="border-0 focus:outline-none text-5xl leading-[48px] mb-5"
+            />
             <div className="space-y-6 leading-6 whitespace-pre-wrap">
-              {description}
+              <textarea
+                {...register("description")}
+                className="w-full h-52 border-0 focus:outline-none text-lg"
+                placeholder="Описание компании"
+              />
             </div>
           </div>
         </div>

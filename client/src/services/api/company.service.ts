@@ -22,3 +22,8 @@ export const getCompanyEmployees = async (): Promise<ISector[]> => {
   const { data } = await api.get<ISector[]>(`companies/employees-number/`);
   return data;
 };
+
+export const getCompanyByToken = async (): Promise<ICompany> => {
+  const { data } = await api.get<ICompany>(`companies/my/`);
+  return data;
+};
