@@ -56,8 +56,7 @@ export const createVacancySchema = yup.object({
   name: yup.string().required("Название вакансии обязательно"),
   description: yup.string().required("Описание обязательно"),
   location: yup
-    .object()
-    .shape({
+    .object({
       id: yup.number().required(),
       name: yup.string().required(),
       value: yup.string().required(),

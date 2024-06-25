@@ -1,5 +1,5 @@
-import { useController } from 'react-hook-form';
-import { Select } from './Select';
+import { useController } from "react-hook-form";
+import { Select } from "./Select";
 
 export const ControlledSelect = ({
   name,
@@ -21,6 +21,7 @@ export const ControlledSelect = ({
     name,
     control,
   });
+  console.log("🚀 ~ error:", error);
 
   const handleChange = (selectedValue: any) => {
     onControllerChange(selectedValue);
@@ -37,7 +38,7 @@ export const ControlledSelect = ({
         placeholder={placeholder}
         onChange={handleChange}
       />
-      {error && <div className="text-red-500 text-sm">{error.message}</div>}
+      {error && <div className="text-red-500 text-sm">Нужно выбрать</div>}
     </div>
   );
 };
