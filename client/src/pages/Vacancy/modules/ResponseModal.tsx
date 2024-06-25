@@ -1,16 +1,16 @@
-import { useState } from "react";
+import { useResponseVacancyQuery } from "@/services/queries/responseVacancy.query";
 import {
-  useFloating,
-  useDismiss,
-  useRole,
-  useClick,
-  useInteractions,
-  useId,
   FloatingFocusManager,
   FloatingOverlay,
   FloatingPortal,
+  useClick,
+  useDismiss,
+  useFloating,
+  useId,
+  useInteractions,
+  useRole,
 } from "@floating-ui/react";
-import { useResponseVacancyQuery } from "@/services/queries/responseVacancy.query";
+import { useState } from "react";
 
 export function ResponseModal({
   isOpen,
@@ -51,7 +51,7 @@ export function ResponseModal({
     <>
       <FloatingPortal>
         {isOpen && (
-          <FloatingOverlay className="bg-neutral-800 opacity-80" lockScroll>
+          <FloatingOverlay className="bg-neutral-800/80" lockScroll>
             <FloatingFocusManager context={context}>
               <div
                 className="m-auto mt-60 rounded bg-white max-h-max max-w-max flex gap-6 flex-col justify-center items-center py-6 px-8 "
