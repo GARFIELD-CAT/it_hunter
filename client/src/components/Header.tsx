@@ -1,30 +1,28 @@
 import useAuthStore from "@/store/useAuthStore";
 
 import Logo from "@/assets/svg/logo.svg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import {
-  useFloating,
-  autoUpdate,
-  offset,
-  flip,
-  shift,
-  useDismiss,
-  useRole,
-  useClick,
-  useInteractions,
   FloatingFocusManager,
-  useId,
+  autoUpdate,
+  flip,
+  offset,
+  shift,
+  useClick,
+  useDismiss,
+  useFloating,
+  useInteractions,
+  useRole,
 } from "@floating-ui/react";
 import { useState } from "react";
 
-import SignOut from "@/assets/svg/sign-out.svg";
-import Folder from "@/assets/svg/folder.svg";
 import Document from "@/assets/svg/document.svg";
+import Folder from "@/assets/svg/folder.svg";
+import SignOut from "@/assets/svg/sign-out.svg";
 
 const Header = () => {
-  const { isAuthenticated, logout } = useAuthStore((state) => state);
-  const navigate = useNavigate();
+  const { isAuthenticated } = useAuthStore((state) => state);
   console.log("🚀 ~ Header ~ isAuthenticated:", isAuthenticated);
 
   return (
